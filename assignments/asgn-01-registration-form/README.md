@@ -23,15 +23,15 @@ Mainly in:
 
 #### 表单结构：
 你的表单应该至少包含以下字段：  
-First Name (text input field)
-Last Name (text input field)
-Email Address (appropriate input type)
-Password (password input field with appropriate attributes to ensure security)
-Confirm Password (password input field)
-Date of Birth (date picker)
-Gender (radio buttons: Male/Female/Other)
-About Me (textarea)
-Choose Your Profession (dropdown list with options like "Web Development", "Data Analytics", "UI/UX Design", etc.)
+* First Name (text input field)  
+* Last Name (text input field)  
+* Email Address (appropriate input type)  
+* Password (password input field with appropriate attributes to ensure security)  
+* Confirm Password (password input field)  
+* Date of Birth (date picker)  
+* Gender (radio buttons: Male/Female/Other)  
+* About Me (textarea)  
+* Choose Your Profession (dropdown list with options like "Web Development", "Data Analytics", "UI/UX Design", etc.)
 
 #### 布局和样式：
 
