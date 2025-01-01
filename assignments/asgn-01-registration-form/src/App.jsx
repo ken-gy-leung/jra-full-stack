@@ -9,10 +9,17 @@ function App() {
   return (
     <>
       <form>
-        <label htmlFor="first-name">First Name</label>
-        <input type="text" id="first-name" placeholder="First Name" />
-        <label htmlFor="last-name">Last Name</label>
-        <input type="text" id="last-name" placeholder="Last Name" />
+        <div className="title">Registration Form</div>
+        <div className="name-group">
+          <div className="label-input-group">
+            <label htmlFor="first-name">First Name</label>
+            <input type="text" id="first-name" placeholder="First Name" />
+          </div>
+          <div className="label-input-group">
+            <label htmlFor="last-name">Last Name</label>
+            <input type="text" id="last-name" placeholder="Last Name" />
+          </div>
+        </div>
         <label htmlFor="email-address">Email Address</label>
         <input type="email" id="email-address" placeholder="Email Address" />
         <label htmlFor="password">Password</label>

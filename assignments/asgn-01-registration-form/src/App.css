@@ -14,8 +14,22 @@ form {
   text-align: left;
 }
 
+.name-group {
+  display: flex;
+  gap: 10px;
+}
+
+.label-input-group {
+  width: 180px;
+}
 .radio-group {
   display: flex;
-  flex-direction: row;
   gap: 10px;
+}
+
+textarea#about-me {
+  width: 100%;
+  min-height: 100px;
+  padding: 0;
+  resize: none;
 }
