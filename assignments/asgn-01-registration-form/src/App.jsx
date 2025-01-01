@@ -4,6 +4,26 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
+  // use React state to manage password inputs and error message value
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("empty");
+
+  // event function when password inputs lose focus
+  const handleBlur = (e) => {
+    e.preventDefault();
+    if (password || confirmPassword) {
+      setErrorMessage(
+        password !== confirmPassword
+          ? "Passwords do not match!"
+          : "Passwords match!"
+      );
+    } else {
+      // When both password inputs are empty, empty error message
+      setErrorMessage("empty");
+    }
+  };
+
   return (
     <>
       <form>
@@ -18,7 +38,7 @@ function App() {
               type="text"
               id="first-name"
               placeholder="First Name"
-              required="required"
+              required
             />
           </div>
           <div className="label-input-group">
@@ -29,7 +49,7 @@ function App() {
               type="text"
               id="last-name"
               placeholder="Last Name"
-              required="required"
+              required
             />
           </div>
         </div>
@@ -40,7 +60,7 @@ function App() {
           type="email"
           id="email-address"
           placeholder="Email Address"
-          required="required"
+          required
         />
         <label htmlFor="password" className="required">
           Password
@@ -51,9 +71,11 @@ function App() {
           // HTML5 password validation pattern
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$"
           // title attribute as warning message if invalid (escapes are not working, looking for a better solution)
-          title={`password must be alphabetical, \n\r contain at least one upper case, one lower case and one digit \n\r and be in the range of 8-16 characters`}
+          title={`Password must be only alphabetical with 8-16 characters and \n contain at least one upper case, one lower case and one digit`}
           placeholder="Password"
-          required="required"
+          onChange={(e) => setPassword(e.target.value.trim())}
+          onBlur={handleBlur} // Validate on losing focus
+          required
         />
         <label htmlFor="confirm-password" className="required">
           Confirm Password
@@ -62,9 +84,21 @@ function App() {
           type="password"
           id="confirm-password"
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$"
+          title={`Password must be only alphabetical with 8-16 characters and \n contain at least one upper case, one lower case and one digit`}
           placeholder="Confirm Password"
-          required="required"
+          onChange={(e) => setConfirmPassword(e.target.value.trim())}
+          onBlur={handleBlur} // Validate on losing focus
+          required
         />
+        {/* Show error message when it is not empty  */}
+        <p
+          className="tips"
+          style={{
+            visibility: errorMessage !== "empty" ? "visible" : "hidden",
+          }}
+        >
+          {errorMessage}
+        </p>
         <label htmlFor="date-of-birth">Date of Birth</label>
         {/* type="date" for date picker */}
         <input type="date" id="date-of-birth" />
