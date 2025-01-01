@@ -119,6 +119,9 @@ function App() {
         <textarea id="about-me" placeholder="About Me"></textarea>
         <label htmlFor="profession">Choose Your Profession</label>
         <select id="profession">
+          <option disabled selected value>
+            -- Select an option --
+          </option>
           <option value="web-development">Web Development</option>
           <option value="data-analytics">Data Analytics</option>
           <option value="ui-ux-design">UI/UX Design</option>
