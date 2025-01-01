@@ -110,6 +110,9 @@ function App() {
           <div>
             <input type="radio" name="gender" value="female" /> Female
           </div>
+          <div>
+            <input type="radio" name="gender" value="other" /> Other
+          </div>
         </div>
         <label htmlFor="about-me">About Me</label>
         <textarea id="about-me" placeholder="About Me"></textarea>
