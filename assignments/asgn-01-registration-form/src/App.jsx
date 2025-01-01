@@ -28,8 +28,10 @@ function App() {
     <>
       <form>
         <div id="title">Registration Form</div>
-        {/* className in React (avoid reserved key word) equals to class attribute in plain HTML */}
+
+        {/* Name Inputs (in a group) */}
         <div className="name-group">
+          {/* className in React (avoid reserved key word) equals to class attribute in plain HTML */}
           <div className="label-input-group">
             {/* htmlFor in React (avoid reserved key word) equals to for attribute in plain html */}
             <label htmlFor="first-name" className="required">
@@ -54,6 +56,8 @@ function App() {
             />
           </div>
         </div>
+
+        {/* Email Input */}
         <label htmlFor="email-address" className="required">
           Email Address
         </label>
@@ -63,6 +67,8 @@ function App() {
           placeholder="Email Address"
           required
         />
+
+        {/* Password Input */}
         <label htmlFor="password" className="required">
           Password
         </label>
@@ -78,6 +84,8 @@ function App() {
           onBlur={handleBlur} // Validate on losing focus
           required
         />
+
+        {/* Confirm Password Input */}
         <label htmlFor="confirm-password" className="required">
           Confirm Password
         </label>
@@ -100,9 +108,13 @@ function App() {
         >
           {errorMessage}
         </p>
+
+        {/* Date of Birth Select */}
         <label htmlFor="date-of-birth">Date of Birth</label>
         {/* type="date" for date picker */}
         <input type="date" id="date-of-birth" />
+
+        {/* Gender Radio Select */}
         <label htmlFor="gender">Gender</label>
         <div className="radio-group">
           <div>
@@ -115,8 +127,11 @@ function App() {
             <input type="radio" name="gender" value="other" /> Other
           </div>
         </div>
+
+        {/* About Me Textarea */}
         <label htmlFor="about-me">About Me</label>
         <textarea id="about-me" placeholder="About Me"></textarea>
+        {/* Profession Select Component */}
         <label htmlFor="profession">Choose Your Profession</label>
         <select id="profession">
           <option disabled selected value>
