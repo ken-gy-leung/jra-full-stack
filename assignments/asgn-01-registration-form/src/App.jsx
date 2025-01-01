@@ -49,6 +49,8 @@ function App() {
         <input
           type="password"
           id="password"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$"
+          title={`password must be alphabetical, \n\r contain at least one upper case, one lower case and one digit \n\r and be in the range of 8-16 characters`}
           placeholder="Password"
           required="required"
         />
@@ -58,6 +60,7 @@ function App() {
         <input
           type="password"
           id="confirm-password"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$"
           placeholder="Confirm Password"
           required="required"
         />
