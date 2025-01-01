@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <form>
-        <div className="title">Registration Form</div>
+        <div id="title">Registration Form</div>
         <div className="name-group">
           <div className="label-input-group">
             <label htmlFor="first-name">First Name</label>
