@@ -35,6 +35,10 @@ form {
   gap: 10px;
 }
 
+.required:after {
+  content: " *";
+  color: red;
+}
 input[type="text"] {
   width: 90%;
 }

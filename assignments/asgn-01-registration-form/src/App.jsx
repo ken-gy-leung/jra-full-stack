@@ -12,23 +12,54 @@ function App() {
         <div id="title">Registration Form</div>
         <div className="name-group">
           <div className="label-input-group">
-            <label htmlFor="first-name">First Name</label>
-            <input type="text" id="first-name" placeholder="First Name" />
+            <label htmlFor="first-name" className="required">
+              First Name
+            </label>
+            <input
+              type="text"
+              id="first-name"
+              placeholder="First Name"
+              required="required"
+            />
           </div>
           <div className="label-input-group">
-            <label htmlFor="last-name">Last Name</label>
-            <input type="text" id="last-name" placeholder="Last Name" />
+            <label htmlFor="last-name" className="required">
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="last-name"
+              placeholder="Last Name"
+              required="required"
+            />
           </div>
         </div>
-        <label htmlFor="email-address">Email Address</label>
-        <input type="email" id="email-address" placeholder="Email Address" />
-        <label htmlFor="password">Password</label>
-        <input type="password" id="password" placeholder="Password" />
-        <label htmlFor="confirm-password">Confirm Password</label>
+        <label htmlFor="email-address" className="required">
+          Email Address
+        </label>
+        <input
+          type="email"
+          id="email-address"
+          placeholder="Email Address"
+          required="required"
+        />
+        <label htmlFor="password" className="required">
+          Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          required="required"
+        />
+        <label htmlFor="confirm-password" className="required">
+          Confirm Password
+        </label>
         <input
           type="password"
           id="confirm-password"
           placeholder="Confirm Password"
+          required="required"
         />
         <label htmlFor="date-of-birth">Date of Birth</label>
         <input type="date" id="date-of-birth" />
