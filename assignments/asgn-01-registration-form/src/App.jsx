@@ -4,14 +4,13 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <form>
         <div id="title">Registration Form</div>
         <div className="name-group">
           <div className="label-input-group">
+            {/* htmlFor in React (avoid reserved key word) equals to for attribute in plain html */}
             <label htmlFor="first-name" className="required">
               First Name
             </label>
@@ -49,7 +48,9 @@ function App() {
         <input
           type="password"
           id="password"
+          // HTML5 password validation pattern
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$"
+          // title attribute as warning message if invalid (escapes are not working, looking for a better solution)
           title={`password must be alphabetical, \n\r contain at least one upper case, one lower case and one digit \n\r and be in the range of 8-16 characters`}
           placeholder="Password"
           required="required"
@@ -65,6 +66,7 @@ function App() {
           required="required"
         />
         <label htmlFor="date-of-birth">Date of Birth</label>
+        {/* type="date" for date picker */}
         <input type="date" id="date-of-birth" />
         <label htmlFor="gender">Gender</label>
         <div className="radio-group">

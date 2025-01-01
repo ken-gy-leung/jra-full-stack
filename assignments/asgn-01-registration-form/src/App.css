@@ -6,6 +6,7 @@
   text-align: center;
 }
 
+/* The whole form uses vertical flex layout */
 form {
   display: flex;
   flex-direction: column;
@@ -35,6 +36,7 @@ form {
   gap: 10px;
 }
 
+/* Add red asterisk after required field labels */
 .required:after {
   content: " *";
   color: red;
@@ -70,6 +72,7 @@ button {
   cursor: pointer;
 }
 
+/* submit button onHover effect setting */
 button:hover {
   background-color: rgb(48, 55, 84);
 }
