@@ -9,8 +9,8 @@ npm run dev
 
 ## File changes
 Mainly in:  
-* assignments\asgn-01-registration-form\src\App.jsx ***(HTML)***
-* assignments\asgn-01-registration-form\src\App.css ***(CSS)***
+* \src\App.jsx ***(HTML)***
+* \src\App.css ***(CSS)***
 
 ## Content
 创建Registration Form
