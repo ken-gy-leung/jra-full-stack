@@ -28,6 +28,7 @@ function App() {
     <>
       <form>
         <div id="title">Registration Form</div>
+        {/* className in React (avoid reserved key word) equals to class attribute in plain HTML */}
         <div className="name-group">
           <div className="label-input-group">
             {/* htmlFor in React (avoid reserved key word) equals to for attribute in plain html */}
