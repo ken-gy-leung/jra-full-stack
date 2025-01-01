@@ -71,7 +71,7 @@ function App() {
           id="password"
           // HTML5 password validation pattern
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$"
-          // title attribute as warning message if invalid (escapes are not working, looking for a better solution)
+          // title attribute as warning message if invalid (new line escape is not working in submit alert message (works in onHover hint), looking for a better solution)
           title={`Password must be only alphabetical with 8-16 characters and \n contain at least one upper case, one lower case and one digit`}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value.trim())}
