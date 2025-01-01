@@ -5,4 +5,17 @@
   text-align: center;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  gap: 10px;
+  text-align: left;
+}
 
+.radio-group {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
