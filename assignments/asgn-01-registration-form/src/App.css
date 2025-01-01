@@ -59,7 +59,7 @@ select {
 
 textarea {
   min-height: 100px;
-  padding: 0;
+  padding: 10px;
   resize: none;
 }
 /* password confirmation tips */
