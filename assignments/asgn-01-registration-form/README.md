@@ -2,8 +2,8 @@
 
 ## How to run
 ```shell
-# Please run this script in your terminal,
-# and visit the localhost url in the output
+# Please run this script in your terminal, and visit the localhost url in the output
+
 npm run dev
 ```
 
