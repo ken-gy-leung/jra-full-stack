@@ -1,1 +1,7 @@
+# Course recordings, unnecessary to upload
 recordings/*
+
+node_modules
+
+# Vite cache files
+.Vite
