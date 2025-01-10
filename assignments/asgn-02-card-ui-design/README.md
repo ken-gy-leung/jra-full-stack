@@ -22,14 +22,10 @@ Mainly in:
 选择一个提供的UI设计，完成作业。
 
 参考图一：  
-![参考图一](https://image.jracademy.com.au/lesson/editor/66ebbcbab6f2210012886fe6/6b41a24aa27f883bed79cf9329e6beb0.png)
+![Card-Design-1](README-imgs/Card-Design-1.png)
 
 参考图二：  
-![参考图二](https://image.jracademy.com.au/lesson/editor/66ebbcbab6f2210012886fe6/ed57f5b8462e237bd62872ff63e7bd51.png)
-
-
-
-
+![Card-Design-2](README-imgs/Card-Design-2.png)
 
 ### 作业要求：
 
