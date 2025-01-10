@@ -1,5 +1,15 @@
 # Assignment 03
 
+## How to run
+```shell
+# Please run this script in your terminal
+
+node ShoppingList.js
+```
+
+## File changes
+* \ShoppingList.js ***(JavaScript)***
+
 ## 作业目标:
 
 通过这次的作业，你将会练习JavaScript中的基本数据类型、数组、对象、条件语句、循环语句和函数的应用。
