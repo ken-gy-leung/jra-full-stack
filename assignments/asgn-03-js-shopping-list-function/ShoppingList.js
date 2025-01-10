@@ -19,16 +19,44 @@ let ifShoppingListIsFull = list => {
     }
 }
 
+// test cases
+ifShoppingListIsFull(shoppingList)
+let shoppingList2 = [...shoppingList]
+shoppingList2.push('salmon fillet', 'eggs')
+ifShoppingListIsFull(shoppingList2)
+
 // 2. 使用循环语句遍历购物清单，将每一项物品在控制台上以编号的形式输出。例如：
-let loopAndLogItemsInShoppingList = list => {
+let logItemsInShoppingList = list => {
     for (let i = 0; i < list.length; i++) {
         console.log(`${i + 1}. ${list[i]}`)
     }
 }
 
+// test case
+logItemsInShoppingList(shoppingList)
+
 // 四、函数与对象：
 // 1. 创建一个函数，该函数接受物品名称作为参数，并返回该物品是否在购物清单中。
-let ifItemInShoppingList = itemName => shoppingList.map(item => item.toLowerCase()).includes(itemName.trim().toLowerCase())
+let ifItemInShoppingList = itemName => {
+    for (let index = 0; index < shoppingList.length; index++) {
+        if (shoppingList[index].trim().toLowerCase() == itemName.trim().toLowerCase()) {
+            return true
+        }
+    }
+    return false
+}
+
+// test cases
+let testNames = ['  cheese slice ', 'Masala']
+console.log('Whether Items are in the shopping list:')
+for (let index = 0; index < testNames.length; index++) {
+    let testName = testNames[index]
+    let flag = ifItemInShoppingList(testName)
+    console.log(`${testName.trim().toLowerCase()}: [${flag ? '\u2713' : '\u292B'}]`)
+}
 
 // 2. 创建一个购物物品对象，其中包括物品名称、价格和数量
 let createItemObject = (name, price, quantity) => ({ name, price, quantity })
+
+// test case
+console.log(createItemObject('KitKat', '$7.00', 666))
