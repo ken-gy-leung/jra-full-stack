@@ -26,7 +26,7 @@ function App() {
   const cards1 = [];
   for (let i = 0; i < propsList1.length; i++) {
     const props = propsList1[i];
-    cards1.push(<DemoCard1 {...props}></DemoCard1>);
+    cards1.push(<DemoCard1 key={props.topic} {...props}></DemoCard1>);
   }
 
   return (
