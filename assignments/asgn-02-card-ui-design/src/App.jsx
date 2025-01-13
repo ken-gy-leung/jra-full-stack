@@ -2,34 +2,39 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import DemoCard1 from "./components/DemoCard1";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const propsList1 = [
+    {
+      topic: "UX Research",
+      outline:
+        "Conduct UX research to explore user preferences, behaviors, and expectations for effective and engaging card designs.",
+    },
+    {
+      topic: "Bootcamp",
+      outline:
+        "Join our intensive bootcamp program to master modern web development skills through hands-on projects and expert mentorship.",
+    },
+    {
+      topic: "Coffee Chat",
+      outline:
+        "Join us for informal networking sessions over coffee, where professionals share experiences and insights in a relaxed atmosphere.",
+    },
+  ];
+
+  const cards1 = [];
+  for (let i = 0; i < propsList1.length; i++) {
+    const props = propsList1[i];
+    cards1.push(<DemoCard1 {...props}></DemoCard1>);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Demo Card 1</h1>
+      {cards1}
     </>
-  )
+  );
 }
 
 export default App
