@@ -10,7 +10,9 @@ const DemoCard1 = ({ topic, outline }) => {
   return (
     <div
       className="demoCard1"
-      style={{ backgroundImage: `url(/src/images/${bgImgName}-card-bg.jpg)` }}
+      style={{
+        backgroundImage: `url(/src/assets/images/card-bg-${bgImgName}.jpg)`,
+      }}
     >
       <div>{topic}</div>
       <div>{outline}</div>
