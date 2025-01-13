@@ -11,6 +11,7 @@ npm run dev
 Mainly in:  
 * \src\App.jsx ***(HTML)***
 * \src\App.css ***(CSS)***
+* \src\components\DemoCard1.jsx ***(HTML)***
 
 ## Content
 卡片式设计（Card UI Design）
