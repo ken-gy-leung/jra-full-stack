@@ -1,8 +1,17 @@
 import React from "react";
 
 const DemoCard1 = ({ topic, outline }) => {
+  const bgImgName = topic
+    .trim()
+    .split(/\s+/)
+    .map((sub) => sub.toLowerCase())
+    .join("-");
+
   return (
-    <div>
+    <div
+      className="demoCard1"
+      style={{ backgroundImage: `url(/src/images/${bgImgName}-card-bg.jpg)` }}
+    >
       <div>{topic}</div>
       <div>{outline}</div>
       <div>LEARN MORE</div>
