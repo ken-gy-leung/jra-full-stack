@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/DemoCard1.css";
 
 const DemoCard1 = ({ topic, outline }) => {
   return (
