@@ -9,7 +9,7 @@ const DemoCard1 = ({ topic, outline }) => {
 
   return (
     <div
-      className="demoCard1"
+      className="demo-card-1"
       style={{
         backgroundImage: `url(/src/assets/images/card-bg-${bgImgName}.jpg)`,
       }}
