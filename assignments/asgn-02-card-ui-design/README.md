@@ -9,9 +9,9 @@ npm run dev
 
 ## File changes
 Mainly in:  
-* \src\App.jsx ***(HTML)***
-* \src\App.css ***(CSS)***
-* \src\components\DemoCard1.jsx ***(HTML)***
+* [\src\App.jsx](https://github.com/ken-gy-leung/jra-full-stack/blob/asgn02/assignments/asgn-02-card-ui-design/src/App.jsx) ***(HTML)***
+* [\src\App.css](https://github.com/ken-gy-leung/jra-full-stack/blob/asgn02/assignments/asgn-02-card-ui-design/src/App.css) ***(CSS)***
+* [\src\components\DemoCard1.jsx](https://github.com/ken-gy-leung/jra-full-stack/blob/asgn02/assignments/asgn-02-card-ui-design/src/components/DemoCard1.jsx) ***(HTML)***
 
 ## Content
 卡片式设计（Card UI Design）
