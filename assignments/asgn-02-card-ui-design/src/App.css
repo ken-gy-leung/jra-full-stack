@@ -35,6 +35,29 @@
     flex-direction: column;
     gap: 0.5em;
     /* box-sizing: border-box; */
+    /* For positioning setting of linear-gradient ::before layer */
+      position: relative;
+    }
+    
+    /* Add this new rule for the gradient overlay */
+    .demoCard1::before {
+      position: absolute;
+      background: linear-gradient(154deg, rgba(61, 209, 186, 0.99) 26%, rgba(27, 225, 231, 0.7) 42%, rgba(213, 128, 176, 0.4) 72%);
+      content: '';
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /* Ensure gradient layer stays above card bg image but under card text  */
+      z-index: 1;
+      /* Match parent's border-radius */
+      border-radius: 10px;
+    }
+    
+    /* Ensure card text stays above the gradient layer */
+    .demoCard1>* {
+      position: relative;
+      z-index: 2;
   }
   
   .card1-topic {
@@ -70,4 +93,12 @@
     border: 1px solid white;
     border-radius: 3px;
     padding: 1em 2em;
+    cursor: pointer;
+    }
+    
+    .demoCard1:hover {
+      transform: translateY(-5px);
+      /* Slight lift effect */
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      /* Bigger shadow on hover */
 }
