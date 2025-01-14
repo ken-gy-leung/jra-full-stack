@@ -59,10 +59,19 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* Ensure gradient layer stays above card bg image but under card text  */
   z-index: 1;
-  /* Match parent's border-radius */
   border-radius: 10px;
+  /* Make gradient larger than container */
+    background-size: 200% 200%;
+    /* Starting position */
+    background-position: 0% 0%;
+    /* Smooth transition */
+    transition: background-position 0.3s ease;
+  }
+  
+  .demoCard1:hover::before {
+    background-position: 100% 100%;
+    /* Move gradient diagonally */
 }
 
 /* Ensure card text stays above the gradient layer */
