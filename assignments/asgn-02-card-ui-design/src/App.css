@@ -5,62 +5,69 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 .cards1Wrapper {
-  display: flex;
-  /* Allow items to be wrapped onto multiple lines when there is no enough space */
-  flex-wrap: wrap;
   width: 100%;
+  display: flex;
+  /* Allow items to be wrapped onto multiple lines 
+          when there is no enough space */
+  flex-wrap: wrap;
+  gap: 1em;
+    justify-content: center;
 }
 
 .demoCard1 {
   color: white;
-  font-size: 1.5em;
-  width: 15em;
-  height: 7em;
-  padding: 2em 0.6em;
-  margin: auto 0.3em;
+  /* font-size: 1.5em; */
+    width: 18em;
+    height: auto;
+    min-height: 9em;
+    padding: 2.8em 1.5em 1.5em;
+    /* margin: auto 0.3em; */
   border: 1px solid #ccc;
-  border-radius: 15px;
+  border-radius: 10px;
   /* Makes the image cover the entire div */
   background-size: cover;
   /* Prevents tiling */
   background-repeat: no-repeat;
   /* Centers the image within the div */
   background-position: center;
+  display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    /* box-sizing: border-box; */
+  }
+  
+  .card1-topic {
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1em;
+  }
+  
+  .card1-outline {
+    text-align: left;
+    /* Fine tune with adjusting space between words and letters */
+    /* word-spacing: 2px; 
+                    letter-spacing: 1px; */
+    /* Break long words */
+    word-break: break-all;
+    overflow-wrap: break-word;
+    /* Add hyphen at break points */
+    hyphens: auto;
+    /* For Chrome */
+    -webkit-hyphens: auto;
+    /* For IE/Edge */
+    -ms-hyphens: auto;
+    font-size: 0.7em;
+  }
+  
+  .card1-button-more {
+    width: fit-content;
+    justify-content: left;
+    text-align: center;
+    font-size: 0.5em;
+    font-weight: bold;
+    border: 1px solid white;
+    border-radius: 3px;
+    padding: 1em 2em;
 }

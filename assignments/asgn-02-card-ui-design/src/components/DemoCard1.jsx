@@ -14,9 +14,9 @@ const DemoCard1 = ({ topic, outline }) => {
         backgroundImage: `url(/src/assets/images/card-bg-${bgImgName}.jpg)`,
       }}
     >
-      <div>{topic}</div>
-      <div>{outline}</div>
-      <div>LEARN MORE</div>
+      <div className="card1-topic">{topic}</div>
+      <div className="card1-outline">{outline}</div>
+      <div className="card1-button-more">LEARN MORE</div>
     </div>
   );
 };
