@@ -32,7 +32,7 @@ function App() {
   return (
     <>
       <h1>Demo Card 1</h1>
-      {cards1}
+      <div className="cards1Wrapper">{cards1}</div>
     </>
   );
 }

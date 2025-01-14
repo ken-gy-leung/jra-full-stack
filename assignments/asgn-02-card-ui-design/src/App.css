@@ -40,3 +40,27 @@
 .read-the-docs {
   color: #888;
 }
+
+.cards1Wrapper {
+  display: flex;
+  /* Allow items to be wrapped onto multiple lines when there is no enough space */
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.demoCard1 {
+  color: white;
+  font-size: 1.5em;
+  width: 15em;
+  height: 7em;
+  padding: 2em 0.6em;
+  margin: auto 0.3em;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  /* Makes the image cover the entire div */
+  background-size: cover;
+  /* Prevents tiling */
+  background-repeat: no-repeat;
+  /* Centers the image within the div */
+  background-position: center;
+}
