@@ -18,7 +18,7 @@
 .demoCard1 {
   color: white;
   /* font-size: 1.5em; */
-    width: 18em;
+  width: 18em;
     height: auto;
     min-height: 9em;
     padding: 2.8em 1.5em 1.5em;
@@ -32,73 +32,78 @@
   /* Centers the image within the div */
   background-position: center;
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
     gap: 0.5em;
     /* box-sizing: border-box; */
     /* For positioning setting of linear-gradient ::before layer */
-      position: relative;
-    }
-    
-    /* Add this new rule for the gradient overlay */
-    .demoCard1::before {
-      position: absolute;
-      background: linear-gradient(154deg, rgba(61, 209, 186, 0.99) 26%, rgba(27, 225, 231, 0.7) 42%, rgba(213, 128, 176, 0.4) 72%);
-      content: '';
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      /* Ensure gradient layer stays above card bg image but under card text  */
-      z-index: 1;
-      /* Match parent's border-radius */
-      border-radius: 10px;
-    }
-    
-    /* Ensure card text stays above the gradient layer */
-    .demoCard1>* {
-      position: relative;
-      z-index: 2;
-  }
-  
-  .card1-topic {
-    text-align: left;
-    font-size: 1.5em;
-    font-weight: bold;
-    line-height: 1em;
-  }
-  
-  .card1-outline {
-    text-align: left;
-    /* Fine tune with adjusting space between words and letters */
-    /* word-spacing: 2px; 
-                    letter-spacing: 1px; */
-    /* Break long words */
-    word-break: break-all;
-    overflow-wrap: break-word;
-    /* Add hyphen at break points */
-    hyphens: auto;
-    /* For Chrome */
-    -webkit-hyphens: auto;
-    /* For IE/Edge */
-    -ms-hyphens: auto;
-    font-size: 0.7em;
-  }
-  
-  .card1-button-more {
-    width: fit-content;
-    justify-content: left;
-    text-align: center;
-    font-size: 0.5em;
-    font-weight: bold;
-    border: 1px solid white;
-    border-radius: 3px;
-    padding: 1em 2em;
-    cursor: pointer;
-    }
-    
-    .demoCard1:hover {
-      transform: translateY(-5px);
-      /* Slight lift effect */
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      /* Bigger shadow on hover */
+    position: relative;
+  /* Add smooth transition for the hover effect */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Optional: subtle shadow by default */
 }
+/* Enlarge card shadow on hover */
+.demoCard1:hover {
+  /* Slightly lift effect */
+  transform: translateY(-5px);
+  /* Bigger shadow on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* gradient overlay */
+.demoCard1::before {
+  position: absolute;
+  background: linear-gradient(154deg, rgba(61, 209, 186, 0.99) 26%, rgba(27, 225, 231, 0.7) 42%, rgba(213, 128, 176, 0.4) 72%);
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Ensure gradient layer stays above card bg image but under card text  */
+  z-index: 1;
+  /* Match parent's border-radius */
+  border-radius: 10px;
+}
+
+/* Ensure card text stays above the gradient layer */
+.demoCard1>* {
+  position: relative;
+  z-index: 2;
+}
+
+.card1-topic {
+  text-align: left;
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1em;
+}
+  
+.card1-outline {
+  text-align: left;
+  /* Fine tune with adjusting space between words and letters */
+  /* word-spacing: 2px; 
+                  letter-spacing: 1px; */
+  /* Break long words */
+  word-break: break-all;
+  overflow-wrap: break-word;
+  /* Add hyphen at break points */
+  hyphens: auto;
+  /* For Chrome */
+  -webkit-hyphens: auto;
+  /* For IE/Edge */
+  -ms-hyphens: auto;
+  font-size: 0.7em;
+}
+
+.card1-button-more {
+  width: fit-content;
+  justify-content: left;
+  text-align: center;
+  font-size: 0.5em;
+  font-weight: bold;
+  border: 1px solid white;
+  border-radius: 3px;
+  padding: 1em 2em;
+  cursor: pointer;
+}
+    
