@@ -21,7 +21,7 @@ const ifShoppingListIsFull = list => {
 
 // test cases
 ifShoppingListIsFull(shoppingList)
-let shoppingList2 = [...shoppingList]
+const shoppingList2 = [...shoppingList]
 shoppingList2.push('salmon fillet', 'eggs')
 ifShoppingListIsFull(shoppingList2)
 
