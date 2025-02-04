@@ -25,7 +25,7 @@ let shoppingList2 = [...shoppingList]
 shoppingList2.push('salmon fillet', 'eggs')
 ifShoppingListIsFull(shoppingList2)
 
-// 2. 使用循环语句遍历购物清单，将每一项物品在控制台上以编号的形式输出。例如：
+// 2. 使用循环语句遍历购物清单，将每一项物品在控制台上以编号的形式输出。
 const logItemsInShoppingList = list => {
     for (let i = 0; i < list.length; i++) {
         console.log(`${i + 1}. ${list[i]}`)
@@ -55,7 +55,7 @@ for (let index = 0; index < testNames.length; index++) {
     console.log(`${testName.trim().toLowerCase()}: [${flag ? '\u2713' : '\u292B'}]`)
 }
 
-// 2. 创建一个购物物品对象，其中包括物品名称、价格和数量
+// 2. 创建一个购物物品对象，其中包括物品名称、价格和数量。
 const createItemObject = (name, price, quantity) => ({ name, price, quantity })
 
 // test case
