@@ -34,12 +34,19 @@ const App = () => {
     localStorage.setItem('filter', newFilter)
   }
 
+  const handleContentChange = (id,content)=>{
+    const updatedTasks=taskList.map(task=>task.id===id? {...task,content}:task)
+    setTaskList(updatedTasks)
+    localStorage.setItem('taskList', JSON.stringify(updatedTasks))
+  }
+
   const allTasks = taskList.map(task => 
     <Task
       key={task.id}
       content={task.content}
       done={task.done}
-      onToggle={done => handleDoneToggle(task.id, done)}
+      onDoneToggle={done => handleDoneToggle(task.id, done)}
+      onContentChange={content => handleContentChange(task.id, content)}
     />
   )
 
@@ -48,7 +55,7 @@ const App = () => {
   return (
     <div className="App">
       <div className="task-adding">
-        <TaskAddingWidget onAdd={handleTaskAdd} />
+        <TaskAddingWidget onTaskAdd={handleTaskAdd} />
       </div>
       <select className='task-filter' onChange={handleFilterChange}>
         <option value="all" selected={filter==="all"}>All</option>
