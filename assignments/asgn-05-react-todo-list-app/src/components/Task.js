@@ -1,13 +1,14 @@
+const Task = ({ content, done, onToggle }) => {
+    const toggleDone = event => {
+        onToggle(event.target.checked)
+    }
 
-const Task = ({content,done}) => {
-  return (
-    <>
-    <div className="task-content">
-{content}
-    </div>
-    <input type="checkbox" className="btn btn-primary" checked={done} />
-    </>
-  )
+    return (
+        <div className="task">
+            <input className="task-done" type="checkbox" checked={done} onChange={toggleDone} />
+            <div className="task-content">{content}</div>
+        </div>
+    )
 }
 
 export default Task
