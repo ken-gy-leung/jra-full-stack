@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'
 import Task from './components/Task'
+import TaskAddingWidget from './components/TaskAddingWidget'
 import { v4  } from 'uuid'
 
 const App = () => {
@@ -25,6 +26,13 @@ const App = () => {
     console.log(updatedTasks)
   }
 
+  const handleAdd = (content)=>{
+    console.log(taskList)
+    const newTask = { id: v4(), content, done: false }
+    setTaskList([...taskList, newTask])
+    console.log(taskList)
+  }
+
   const tasks = taskList.map(task => {
     return (
       <Task
@@ -38,9 +46,11 @@ const App = () => {
 
   return (
     <div className="App">
+      <div className='task-adding'>
+        <TaskAddingWidget onAdd={handleAdd} />
+      </div>
       <div className='task-list'>
         {tasks}
-        {/* <Task content={t0.content} done={t0.done} /> */}
       </div>
     </div>
   )
