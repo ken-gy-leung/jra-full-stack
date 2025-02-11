@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-const TaskAddingWidget = ({onAdd}) => {
+const TaskAddingWidget = ({onTaskAdd}) => {
   const [content, setContent] = useState('')
   const handleInputChange = event => { 
     setContent(event.target.value) 
@@ -8,7 +8,7 @@ const TaskAddingWidget = ({onAdd}) => {
 
   const handleTaskAdd = () => {
     if(content.trim() === '') return
-    onAdd(content)
+    onTaskAdd(content)
     setContent('')
   }
 
