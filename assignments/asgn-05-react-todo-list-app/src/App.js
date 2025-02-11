@@ -5,34 +5,33 @@ import TaskAddingWidget from './components/TaskAddingWidget'
 import { v4  } from 'uuid'
 
 const App = () => {
-  const tasksData = [
-    { content: "Finish assignment 5 today", done: true },
-    { content: "Finish assignment 4 today", done: false },
-    { content: "Finish assignment 3 today", done: false },
-    { content: "Finish assignment 2 today", done: false },
-    { content: "Finish assignment 1 today", done: false },
-  ]
+  // initialize state taskList with the value from localStorage, or an empty array if there is no value
+  const localTaskList = localStorage.getItem('taskList')
+  const [taskList, setTaskList] = useState(localTaskList ? JSON.parse(localTaskList) : [])
 
-  const taskDataWithId = tasksData.map(task => {
+  // initialize state filter with the value from localStorage, or 'all' if there is no value
+  const [filter, setFilter] = useState(localStorage.getItem('filter') || 'all')
+
+  const handleTaskAdd = content => {
     // use v4 from uuid to generate a unique id for each task
-    return { ...task, id: v4() }
-  })
-
-  const [taskList, setTaskList] = useState(taskDataWithId)
-  const [filter, setFilter] = useState('all')
-  
-  const handleFilterChange = event => {
-    setFilter(event.target.value)
-  }
-
-  const handleToggle = (id, done) => {
-    const updatedTasks = taskList.map(task=>task.id===id? {...task,done}:task)
-    setTaskList(updatedTasks)
-  }
-
-  const handleAdd = content => {
     const newTask = { id: v4(), content, done: false }
     setTaskList([...taskList, newTask])
+    // use localStorage to store the taskList (after JSON.stringify)
+    localStorage.setItem('taskList', JSON.stringify([...taskList, newTask]))
+  }
+
+  const handleDoneToggle = (id, done) => {
+    const updatedTasks = taskList.map(task=>task.id===id? {...task,done}:task)
+    setTaskList(updatedTasks)
+    // update localStorage with the updated taskList
+    localStorage.setItem('taskList', JSON.stringify(updatedTasks))
+  }
+
+  const handleFilterChange = event => {
+    const newFilter = event.target.value
+    setFilter(newFilter)
+    // update localStorage with the new filter
+    localStorage.setItem('filter', newFilter)
   }
 
   const allTasks = taskList.map(task => 
@@ -40,7 +39,7 @@ const App = () => {
       key={task.id}
       content={task.content}
       done={task.done}
-      onToggle={done => handleToggle(task.id, done)}
+      onToggle={done => handleDoneToggle(task.id, done)}
     />
   )
 
@@ -49,12 +48,12 @@ const App = () => {
   return (
     <div className="App">
       <div className="task-adding">
-        <TaskAddingWidget onAdd={handleAdd} />
+        <TaskAddingWidget onAdd={handleTaskAdd} />
       </div>
       <select className='task-filter' onChange={handleFilterChange}>
-        <option value="all">All</option>
-        <option value="1">Done</option>
-        <option value="0">Undone</option>
+        <option value="all" selected={filter==="all"}>All</option>
+        <option value="1" selected={filter==="1"}>Done</option>
+        <option value="0" selected={filter==="0"}>Undone</option>
       </select>
       <div className="task-list">
         {filteredTasks}
