@@ -5,8 +5,8 @@ const Task = ({ content, done, onToggle }) => {
 
     return (
         <div className="task">
-            <input className="task-done" type="checkbox" checked={done} onChange={toggleDone} />
-            <div className="task-content">{content}</div>
+            <input className="task-checkbox" type="checkbox" checked={done} onChange={toggleDone} />
+            <div className={`task-content ${done? "task-done" : "task-undone"}`}>{content}</div>
         </div>
     )
 }
