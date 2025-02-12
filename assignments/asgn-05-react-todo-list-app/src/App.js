@@ -40,6 +40,12 @@ const App = () => {
     localStorage.setItem('taskList', JSON.stringify(updatedTasks))
   }
 
+  const handleTaskDelete = id =>{
+    const updatedTasks = taskList.filter(task=>task.id!==id)
+    setTaskList(updatedTasks)
+    localStorage.setItem('taskList', JSON.stringify(updatedTasks))
+  }
+
   const allTasks = taskList.map(task => 
     <Task
       key={task.id}
@@ -47,6 +53,7 @@ const App = () => {
       done={task.done}
       onDoneToggle={done => handleDoneToggle(task.id, done)}
       onContentChange={content => handleContentChange(task.id, content)}
+      onTaskDelete={()=>handleTaskDelete(task.id)}
     />
   )
 
