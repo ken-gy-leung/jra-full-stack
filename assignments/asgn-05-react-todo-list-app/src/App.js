@@ -1,30 +1,42 @@
 import React, { useState } from 'react'
 import './App.css'
 import Task from './components/Task'
-import TaskAddingWidget from './components/TaskAddingWidget'
+import AddOrSearchWidget from './components/AddOrSearchWidget'
 import { v4  } from 'uuid'
 
 const App = () => {
   // initialize state taskList with the value from localStorage, or an empty array if there is no value
   const localTaskList = localStorage.getItem('taskList')
-  const [taskList, setTaskList] = useState(localTaskList ? JSON.parse(localTaskList) : [])
+  const initialTasks = localTaskList ? JSON.parse(localTaskList) : []
+  const [taskList, setTaskList] = useState(initialTasks)
 
   // initialize state filter with the value from localStorage, or 'all' if there is no value
   const [filter, setFilter] = useState(localStorage.getItem('filter') || 'all')
+
+  const getLocalTaskStorage = () => {
+    return JSON.parse(localStorage.getItem('taskList'))
+  }
+
+  const setLocalTaskStorage = tasks => {
+    localStorage.setItem('taskList', JSON.stringify(tasks))
+  }
 
   const handleTaskAdd = content => {
     // use v4 from uuid to generate a unique id for each task
     const newTask = { id: v4(), content, done: false }
     setTaskList([...taskList, newTask])
     // use localStorage to store the taskList (after JSON.stringify)
-    localStorage.setItem('taskList', JSON.stringify([...taskList, newTask]))
+    setLocalTaskStorage([...taskList, newTask])
   }
 
   const handleDoneToggle = (id, done) => {
-    const updatedTasks = taskList.map(task=>task.id===id? {...task,done}:task)
-    setTaskList(updatedTasks)
+    const tasks = getLocalTaskStorage()
+    const updatedTasks = tasks.map(task=>task.id===id? {...task,done}:task)
     // update localStorage with the updated taskList
-    localStorage.setItem('taskList', JSON.stringify(updatedTasks))
+    setLocalTaskStorage(updatedTasks)
+
+    const updatedResults = taskList.map(task=>task.id===id? {...task,done}:task)
+    setTaskList(updatedResults)
   }
 
   const handleFilterChange = event => {
@@ -35,15 +47,29 @@ const App = () => {
   }
 
   const handleContentChange = (id,content)=>{
-    const updatedTasks=taskList.map(task=>task.id===id? {...task,content}:task)
-    setTaskList(updatedTasks)
-    localStorage.setItem('taskList', JSON.stringify(updatedTasks))
+    const tasks = getLocalTaskStorage()
+    const updatedTasks=tasks.map(task=>task.id===id? {...task,content}:task)
+    setLocalTaskStorage(updatedTasks)
+
+    const updatedResults = taskList.map(task => task.id === id ? { ...task, content } : task)
+    setTaskList(updatedResults)
   }
 
   const handleTaskDelete = id =>{
-    const updatedTasks = taskList.filter(task=>task.id!==id)
-    setTaskList(updatedTasks)
-    localStorage.setItem('taskList', JSON.stringify(updatedTasks))
+    const tasks = getLocalTaskStorage()
+    const updatedTasks = tasks.filter(task => task.id !== id)
+    setLocalTaskStorage(updatedTasks)
+
+    const updatedResults = taskList.filter(task => task.id !== id)
+    setTaskList(updatedResults)
+  }
+
+  const handleTaskSearch = input => {
+    const tasks = getLocalTaskStorage()
+    if (!input) return setTaskList(tasks)
+    const filteredTasks = tasks.filter(task => task.content.includes(input))
+  console.log(filteredTasks)
+    setTaskList(filteredTasks)
   }
 
   const allTasks = taskList.map(task => 
@@ -62,7 +88,7 @@ const App = () => {
   return (
     <div className="App">
       <div className="task-adding">
-        <TaskAddingWidget onTaskAdd={handleTaskAdd} />
+        <AddOrSearchWidget onTaskAdd={handleTaskAdd} onTaskSearch={handleTaskSearch} />
       </div>
       <select className='task-filter' onChange={handleFilterChange}>
         <option value="all" selected={filter==="all"}>All</option>
@@ -70,7 +96,7 @@ const App = () => {
         <option value="0" selected={filter==="0"}>Undone</option>
       </select>
       <div className="task-list">
-        {filteredTasks}
+        {taskList.length === 0 || filteredTasks.length === 0 ? `--- No ${getLocalTaskStorage().length !== 0 ? 'matching' : ''} tasks ---` : filteredTasks}
       </div>
     </div>
   )
