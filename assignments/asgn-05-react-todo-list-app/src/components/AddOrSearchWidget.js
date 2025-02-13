@@ -1,22 +1,41 @@
 import React, {useState} from 'react'
+import { getCurrentDateTime } from '../utils/commonUtils'
 
 const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   const [action, setAction] = useState('Add')
-  const [input, setInput] = useState('')
+  const [contentInput, setContentInput] = useState('')
+  const [deadlineInput, setDeadlineInput] = useState('')
+  const [deadlineSearchFrom, setDeadlineSearchFrom] = useState('')
+  const [deadlineSearchTo, setDeadlineSearchTo] = useState('')
 
   const handleActionChange = event => {
     setAction(event.target.value)
+    if (!!deadlineInput) {
+      setDeadlineSearchFrom(deadlineInput)
+    }
   }
 
-  const handleInputChange = event => {
-    const inputValue = event.target.value.trim()
-    setInput(inputValue)
+  const handleContentInputChange = event => {
+    const inputValue = event.target.value
+    setContentInput(inputValue)
+  }
+
+  const handleDeadlineChange = event => {
+    setDeadlineInput(event.target.value)
+  }
+
+  const handleDeadlineFromChange = event => {
+    setDeadlineSearchFrom(event.target.value)
+  }
+
+  const handleDeadlineToChange = event => {
+    setDeadlineSearchTo(event.target.value)
   }
 
   const handleTaskAdd = () => {
-    if (input === '') return
-    onTaskAdd(input)
-    setInput('')
+    if (contentInput === '') return
+    onTaskAdd(deadlineInput, contentInput)
+    setContentInput('')
   }
 
   // use Enter key to add task
@@ -27,7 +46,7 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   }
   
   const handleTaskSearch = () => {
-    onTaskSearch(input)
+    onTaskSearch(deadlineSearchFrom, deadlineSearchTo, contentInput)
   }
 
   // use Enter key to search task
@@ -37,21 +56,58 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
     }
   }
 
+  const handleSearchReset = () => {
+    setDeadlineSearchFrom('')
+    setDeadlineSearchTo('')
+    setContentInput('')
+    onTaskSearch('', '', '')
+  }
+
   return (
     <>
       <select onChange={handleActionChange}>
         <option value="Add">Add</option>
         <option value="Search">Search</option>
       </select>
+      {
+        action === 'Add' ?
+        <input
+          type='datetime-local'
+          // use current date & time as min value for datetime-local input
+          min={getCurrentDateTime()}
+          value={deadlineInput}
+          data-placeholder="Pick a Deadline"
+          onChange={handleDeadlineChange}
+        /> :
+        <>
+          <input
+            type='datetime-local'
+            value={deadlineSearchFrom}
+            data-placeholder="From"
+            max={deadlineSearchTo}
+            onChange={handleDeadlineFromChange}
+          />
+          <input
+            type='datetime-local'
+            value={deadlineSearchTo}
+            data-placeholder="To"
+            min={deadlineSearchFrom}
+            onChange={handleDeadlineToChange}
+          />
+        </>
+      }
       <input
         type='text'
-        value={input}
-        onChange={handleInputChange}
+        value={contentInput}
+        onChange={handleContentInputChange}
         onKeyDown={action === 'Add' ? handleTaskAddByEnter : handleTaskSearchByEnter}
         placeholder={`Support 'ENTER' to ${action}`} 
       />
       <button 
         onClick={action === 'Add' ? handleTaskAdd : handleTaskSearch}>{action}
+      </button>
+      <button 
+        onClick={handleSearchReset}>Reset
       </button>
     </>
   )

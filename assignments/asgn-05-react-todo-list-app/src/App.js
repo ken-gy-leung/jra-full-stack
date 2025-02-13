@@ -21,9 +21,9 @@ const App = () => {
     localStorage.setItem('taskList', JSON.stringify(tasks))
   }
 
-  const handleTaskAdd = content => {
+  const handleTaskAdd = (deadline, content) => {
     // use v4 from uuid to generate a unique id for each task
-    const newTask = { id: v4(), content, done: false }
+    const newTask = { id: v4(), deadline, content, done: false }
     setTaskList([...taskList, newTask])
     // use localStorage to store the taskList (after JSON.stringify)
     setLocalTaskStorage([...taskList, newTask])
@@ -46,12 +46,23 @@ const App = () => {
     localStorage.setItem('filter', newFilter)
   }
 
-  const handleContentChange = (id,content)=>{
+  const handleDeadlineChange = (id, deadline) => {
     const tasks = getLocalTaskStorage()
-    const updatedTasks=tasks.map(task=>task.id===id? {...task,content}:task)
+    const updatedTasks = tasks.map(task=>task.id===id? {...task, deadline}:task)
+    setLocalTaskStorage(updatedTasks)
+
+    const updatedResults = taskList.map(task => task.id === id ? { ...task, deadline } : task)
+    setTaskList(updatedResults)
+  }
+
+  const handleContentChange = (id, content) => {
+    const tasks = getLocalTaskStorage()
+    const updatedTasks = tasks.map(task => task.id === id ? { ...task, content } : task)
+
     setLocalTaskStorage(updatedTasks)
 
     const updatedResults = taskList.map(task => task.id === id ? { ...task, content } : task)
+
     setTaskList(updatedResults)
   }
 
@@ -64,20 +75,22 @@ const App = () => {
     setTaskList(updatedResults)
   }
 
-  const handleTaskSearch = input => {
+  const handleTaskSearch = (deadlineFrom, deadlineTo, contentInput) => {
     const tasks = getLocalTaskStorage()
-    if (!input) return setTaskList(tasks)
-    const filteredTasks = tasks.filter(task => task.content.includes(input))
-  console.log(filteredTasks)
+    // return all tasks if no search criteria is provided
+    if ([deadlineFrom, deadlineTo, contentInput].every(arg=>!arg)) return setTaskList(tasks)
+    const filteredTasks = tasks.filter(task => task.deadline >= deadlineFrom && (!deadlineTo || !task.deadline || task.deadline <= deadlineTo) && task.content.includes(contentInput))
     setTaskList(filteredTasks)
   }
 
   const allTasks = taskList.map(task => 
     <Task
       key={task.id}
+      deadline={task.deadline}
       content={task.content}
       done={task.done}
       onDoneToggle={done => handleDoneToggle(task.id, done)}
+      onDeadlineChange={deadline => handleDeadlineChange(task.id, deadline)}
       onContentChange={content => handleContentChange(task.id, content)}
       onTaskDelete={()=>handleTaskDelete(task.id)}
     />
