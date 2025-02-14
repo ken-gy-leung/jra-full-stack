@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './App.css'
 import Task from './components/Task'
 import AddOrSearchWidget from './components/AddOrSearchWidget'
+import { getCurrentDateTime } from './utils/commonUtils'
 import { v4  } from 'uuid'
 
 const App = () => {
@@ -83,6 +84,41 @@ const App = () => {
     setTaskList(filteredTasks)
   }
 
+  const sortTasks = (task1, task2)=> {
+    const now = getCurrentDateTime()
+
+    // Done tasks first
+    if (!task1.done && task2.done) return -1
+    if (!task2.done && task1.done) return 1
+
+    // for undone tasks, sort by deadline (no deadline comes last and the earliest deadline comes first)
+    if (!task1.done && !task2.done) {
+      if (!task1.deadline && task2.deadline) return 1
+      if (!task2.deadline && task1.deadline) return -1
+      if (task1.deadline && task2.deadline) {
+        if (task1.deadline < task2.deadline) return -1
+        if (task1.deadline > task2.deadline) return 1
+      }
+    }
+    
+    // Overdue tasks come first
+    if (task1.deadline && task1.deadline < now && (!task2.deadline || task2.deadline >= now)) return -1
+    if (task2.deadline && task2.deadline < now && (!task1.deadline || task1.deadline >= now)) return 1
+
+    // Undone tasks with deadline come next
+    if (!task1.done && task1.deadline && (!task2.deadline || task2.done)) return -1
+    if (!task2.done && task2.deadline && (!task1.deadline || task1.done)) return 1
+
+    // Undone tasks without deadline come later
+    if (!task1.done && task1.deadline && !task2.done && !task2.deadline) return -1
+    if (!task2.done && task2.deadline && !task1.done && !task1.deadline) return 1
+
+    // Done tasks in reverse time order come last
+    if (task1.done && task2.done) return task2.deadline > task1.deadline ? 1 : -1
+
+    return 0
+  }
+
   const allTasks = taskList.map(task => 
     <Task
       key={task.id}
@@ -96,7 +132,7 @@ const App = () => {
     />
   )
 
-  const filteredTasks = filter !== 'all' ? allTasks.filter(task => task.props.done === !!Number(filter)) : allTasks
+  const filteredTasks = filter === 'all' ? allTasks : allTasks.filter(task => task.props.done === !!Number(filter))
 
   return (
     <div className="App">
@@ -109,7 +145,7 @@ const App = () => {
         <option value="0" selected={filter==="0"}>Undone</option>
       </select>
       <div className="task-list">
-        {taskList.length === 0 || filteredTasks.length === 0 ? `--- No ${getLocalTaskStorage().length !== 0 ? 'matching' : ''} tasks ---` : filteredTasks}
+        {taskList.length === 0 || filteredTasks.length === 0 ? `--- No ${getLocalTaskStorage().length !== 0 ? 'matching' : ''} tasks ---` : filteredTasks.toSorted((a, b) => sortTasks(a.props, b.props))}
       </div>
     </div>
   )

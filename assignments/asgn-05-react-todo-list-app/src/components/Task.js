@@ -13,6 +13,10 @@ const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onConte
         onContentChange(event.target.value)
     }
 
+    const getClassNameByTaskStatus = (fieldClass) => {
+        return `${fieldClass} ${done ? 'task-done' : 'task-undone'} ${!deadline ? 'task-no-deadline' : !done && deadline < getCurrentDateTime() ? 'task-overdue' : ''}`
+    }
+
     return (
         <div className="task">
             <input
@@ -22,7 +26,7 @@ const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onConte
                 onChange={toggleDone}
             />
             <input
-                className="task-date-time-picker"
+                className={getClassNameByTaskStatus('task-date-time-picker')}
                 type="datetime-local"
                 // use current date & time as min value for datetime-local input
                 min={getCurrentDateTime()}
@@ -30,7 +34,7 @@ const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onConte
                 onChange={changeDeadline}
             />
             <input
-                className={`task-content ${done ? "task-done" : "task-undone"}`}
+                className={getClassNameByTaskStatus('task-content')}
                 type="text"
                 value={content}
                 onChange={changeContent}
