@@ -135,16 +135,20 @@ const App = () => {
   const filteredTasks = filter === 'all' ? allTasks : allTasks.filter(task => task.props.done === !!Number(filter))
 
   return (
-    <div className="App">
-      <div className="task-adding">
+    <div className='App'>
+      <div className='task-adding'>
         <AddOrSearchWidget onTaskAdd={handleTaskAdd} onTaskSearch={handleTaskSearch} />
       </div>
-      <select className='task-filter' onChange={handleFilterChange}>
-        <option value="all" selected={filter==="all"}>All</option>
-        <option value="1" selected={filter==="1"}>Done</option>
-        <option value="0" selected={filter==="0"}>Undone</option>
+      <select
+        className='done-filter'
+        name='done-filter'
+        value={filter}
+        onChange={handleFilterChange}>
+        <option value='all'>All</option>
+        <option value='1'>Done</option>
+        <option value='0'>Undone</option>
       </select>
-      <div className="task-list">
+      <div className='task-list'>
         {taskList.length === 0 || filteredTasks.length === 0 ? `--- No ${getLocalTaskStorage().length !== 0 ? 'matching' : ''} tasks ---` : filteredTasks.toSorted((a, b) => sortTasks(a.props, b.props))}
       </div>
     </div>

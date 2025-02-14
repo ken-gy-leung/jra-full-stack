@@ -1,4 +1,4 @@
-import { getCurrentDateTime } from "../utils/commonUtils"
+import { getCurrentDateTime } from '../utils/commonUtils'
 
 const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onContentChange, onTaskDelete }) => {
     const toggleDone = event => {
@@ -18,16 +18,17 @@ const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onConte
     }
 
     return (
-        <div className="task">
+        <div className='task'>
             <input
-                className="task-checkbox"
-                type="checkbox"
+                className='task-checkbox'
+                type='checkbox'
+                name='done-checkbox'
                 checked={done}
                 onChange={toggleDone}
             />
             <input
                 className={getClassNameByTaskStatus('task-date-time-picker')}
-                type="datetime-local"
+                type='datetime-local'
                 // use current date & time as min value for datetime-local input
                 min={getCurrentDateTime()}
                 value={deadline}
@@ -35,11 +36,12 @@ const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onConte
             />
             <input
                 className={getClassNameByTaskStatus('task-content')}
-                type="text"
+                type='text'
+                name='content-input'
                 value={content}
                 onChange={changeContent}
             />
-            <div className="task-delete-button" onClick={onTaskDelete}>&#10060;</div>
+            <div className='task-delete-button' onClick={onTaskDelete}>&#10060;</div>
         </div>
     )
 }

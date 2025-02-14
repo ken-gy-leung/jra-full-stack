@@ -35,6 +35,7 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   const handleTaskAdd = () => {
     if (contentInput === '') return
     onTaskAdd(deadlineInput, contentInput)
+    setDeadlineInput('')
     setContentInput('')
   }
 
@@ -59,15 +60,16 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   const handleSearchReset = () => {
     setDeadlineSearchFrom('')
     setDeadlineSearchTo('')
+    setDeadlineInput('')
     setContentInput('')
     onTaskSearch('', '', '')
   }
 
   return (
     <>
-      <select onChange={handleActionChange}>
-        <option value="Add">Add</option>
-        <option value="Search">Search</option>
+      <select name='action-select' value={action} onChange={handleActionChange}>
+        <option value='Add'>Add</option>
+        <option value='Search'>Search</option>
       </select>
       {
         action === 'Add' ?
@@ -76,21 +78,21 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
           // use current date & time as min value for datetime-local input
           min={getCurrentDateTime()}
           value={deadlineInput}
-          data-placeholder="Pick a Deadline"
+          data-placeholder='Pick a Deadline'
           onChange={handleDeadlineChange}
         /> :
         <>
           <input
             type='datetime-local'
             value={deadlineSearchFrom}
-            data-placeholder="From"
+            data-placeholder='From'
             max={deadlineSearchTo}
             onChange={handleDeadlineFromChange}
           />
           <input
             type='datetime-local'
             value={deadlineSearchTo}
-            data-placeholder="To"
+            data-placeholder='To'
             min={deadlineSearchFrom}
             onChange={handleDeadlineToChange}
           />
@@ -98,6 +100,7 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
       }
       <input
         type='text'
+        name='content-input'
         value={contentInput}
         onChange={handleContentInputChange}
         onKeyDown={action === 'Add' ? handleTaskAddByEnter : handleTaskSearchByEnter}
