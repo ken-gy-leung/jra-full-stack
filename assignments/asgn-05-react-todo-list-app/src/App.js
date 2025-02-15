@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './App.css'
 import Task from './components/Task'
 import AddOrSearchWidget from './components/AddOrSearchWidget'
-import { getCurrentDateTime } from './utils/commonUtils'
+import { getCurrentDateTime } from './utils/utils'
 import { v4  } from 'uuid'
 
 const App = () => {

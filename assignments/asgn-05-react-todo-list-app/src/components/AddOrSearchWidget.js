@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { getCurrentDateTime } from '../utils/commonUtils'
+import { getCurrentDateTime } from '../utils/utils'
 
 const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   const [action, setAction] = useState('Add')

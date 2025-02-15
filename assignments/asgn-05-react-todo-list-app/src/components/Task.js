@@ -1,4 +1,4 @@
-import { getCurrentDateTime } from '../utils/commonUtils'
+import { getCurrentDateTime } from '../utils/utils'
 
 const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onContentChange, onTaskDelete }) => {
     const toggleDone = event => {
