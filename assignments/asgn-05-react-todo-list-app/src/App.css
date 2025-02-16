@@ -5,33 +5,13 @@
   justify-content: center;
 }
 
-.task-list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 2px;
-}
-
 .task{
   display: flex;
   column-gap: 1px;
 }
 
-.task-done {
-  color: rgb(207, 207, 207);
-  text-decoration: line-through;
-  border: 2px solid rgb(207, 207, 207);
-}
-
-.task-overdue {
-  border: 2px solid red;
-}
-
-.task-no-deadline {
-  border: 2px solid rgb(244, 202, 12);
-}
-
-.task input:not(.task-checkbox):not(.task-done):not(.task-overdue):not(.task-no-deadline) {
-  border: 2px solid black
+.task-date-time-picker{
+  cursor: pointer;
 }
 
 .task-delete-button {

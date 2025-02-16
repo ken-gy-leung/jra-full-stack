@@ -1,6 +1,6 @@
 import { getCurrentDateTime } from '../utils/utils'
 
-const Task = ({ deadline, title, content, done, onDoneToggle, onDeadlineChange, onTitleChange, onContentChange, onTaskDelete }) => {
+const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadlineChange, onTitleChange, onContentChange, onTaskDelete }) => {
     const toggleDone = event => {
         onDoneToggle(event.target.checked)
     }
@@ -17,35 +17,31 @@ const Task = ({ deadline, title, content, done, onDoneToggle, onDeadlineChange, 
         onContentChange(event.target.value)
     }
 
-    const getClassNameByTaskStatus = (fieldClass) => {
-        return `${fieldClass} ${done ? 'task-done' : 'task-undone'} ${!deadline ? 'task-no-deadline' : !done && deadline < getCurrentDateTime() ? 'task-overdue' : ''}`
-    }
-
     return (
         <div className='task'>
             <input
-                className={getClassNameByTaskStatus('task-date-time-picker')}
+                className={`task-date-time-picker task-${status}`}
                 type='datetime-local'
                 // use current date & time as min value for datetime-local input
-                min={getCurrentDateTime()}
+                // min={getCurrentDateTime()}
                 value={deadline}
                 onChange={changeDeadline}
             />
             <input
-                className={getClassNameByTaskStatus('task-title')}
+                className={`task-title task-${status}`}
                 type='text'
                 name='title-input'
                 value={title}
                 onChange={changeTitle}
             />
             <input
-                className={getClassNameByTaskStatus('task-content')}
+                className={`task-content task-${status}`}
                 type='text'
                 name='content-input'
                 value={content}
                 onChange={changeContent}
             />
-            <div className="task-controls">
+            <div className='task-controls'>
                 <div className='task-delete-button' onClick={onTaskDelete}>&#10060;</div>
                 <input
                     className='task-checkbox'

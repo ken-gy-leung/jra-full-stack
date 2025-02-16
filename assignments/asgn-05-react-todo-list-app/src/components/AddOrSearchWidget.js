@@ -85,7 +85,7 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
         <input
           type='datetime-local'
           // use current date & time as min value for datetime-local input
-          min={getCurrentDateTime()}
+          // min={getCurrentDateTime()}
           value={deadlineInput}
           data-placeholder='Pick a Deadline'
           onChange={handleDeadlineChange}

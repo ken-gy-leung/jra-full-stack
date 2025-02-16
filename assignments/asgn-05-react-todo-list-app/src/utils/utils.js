@@ -7,4 +7,10 @@ const getCurrentDateTime = () => {
     return now.toISOString().slice(0, 16)
 }
 
-export { getCurrentDateTime }
+// capitalize first letter of a word
+const capitalizeWord = word => word.charAt(0).toUpperCase() + word.slice(1)
+
+// capitalize first letter of each word in a sentence
+const capitalizeSentence = sentence => sentence.replace(/\b\w/g, c => c.toUpperCase())
+
+export { getCurrentDateTime, capitalizeWord, capitalizeSentence }
