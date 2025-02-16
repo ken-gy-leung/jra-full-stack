@@ -23,9 +23,9 @@ const App = () => {
     localStorage.setItem('taskList', JSON.stringify(tasks))
   }
 
-  const handleTaskAdd = (deadline, content) => {
+  const handleTaskAdd = (deadline, title, content) => {
     // use v4 from uuid to generate a unique id for each task
-    const newTask = { id: v4(), deadline, content, done: false }
+    const newTask = { id: v4(), deadline, title, content, done: false }
     setTaskList([...taskList, newTask])
     // use localStorage to store the taskList (after JSON.stringify)
     setLocalTaskStorage([...taskList, newTask])
@@ -57,6 +57,17 @@ const App = () => {
     setTaskList(updatedResults)
   }
 
+  const handleTitleChange = (id, title) => {
+    const tasks = getLocalTaskStorage()
+    const updatedTasks = tasks.map(task => task.id === id ? { ...task, title } : task)
+
+    setLocalTaskStorage(updatedTasks)
+
+    const updatedResults = taskList.map(task => task.id === id ? { ...task, title } : task)
+
+    setTaskList(updatedResults)
+  }
+
   const handleContentChange = (id, content) => {
     const tasks = getLocalTaskStorage()
     const updatedTasks = tasks.map(task => task.id === id ? { ...task, content } : task)
@@ -77,11 +88,11 @@ const App = () => {
     setTaskList(updatedResults)
   }
 
-  const handleTaskSearch = (deadlineFrom, deadlineTo, contentInput) => {
+  const handleTaskSearch = (deadlineFrom, deadlineTo, titleInput, contentInput) => {
     const tasks = getLocalTaskStorage()
     // return all tasks if no search criteria is provided
-    if ([deadlineFrom, deadlineTo, contentInput].every(arg=>!arg)) return setTaskList(tasks)
-    const filteredTasks = tasks.filter(task => task.deadline >= deadlineFrom && (!deadlineTo || !task.deadline || task.deadline <= deadlineTo) && task.content.includes(contentInput))
+    if ([deadlineFrom, deadlineTo, titleInput, contentInput].every(arg => !arg)) return setTaskList(tasks)
+    const filteredTasks = tasks.filter(task => task.deadline >= deadlineFrom && (!deadlineTo || !task.deadline || task.deadline <= deadlineTo) && task.title.includes(titleInput) && task.content.includes(contentInput))
     setTaskList(filteredTasks)
   }
 
@@ -124,10 +135,12 @@ const App = () => {
     <Task
       key={task.id}
       deadline={task.deadline}
+      title={task.title}
       content={task.content}
       done={task.done}
       onDoneToggle={done => handleDoneToggle(task.id, done)}
       onDeadlineChange={deadline => handleDeadlineChange(task.id, deadline)}
+      onTitleChange={title => handleTitleChange(task.id, title)}
       onContentChange={content => handleContentChange(task.id, content)}
       onTaskDelete={()=>handleTaskDelete(task.id)}
     />

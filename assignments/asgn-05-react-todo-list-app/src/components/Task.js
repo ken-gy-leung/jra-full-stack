@@ -1,12 +1,16 @@
 import { getCurrentDateTime } from '../utils/utils'
 
-const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onContentChange, onTaskDelete }) => {
+const Task = ({ deadline, title, content, done, onDoneToggle, onDeadlineChange, onTitleChange, onContentChange, onTaskDelete }) => {
     const toggleDone = event => {
         onDoneToggle(event.target.checked)
     }
 
     const changeDeadline = event => {
         onDeadlineChange(event.target.value)
+    }
+
+    const changeTitle = event => {
+        onTitleChange(event.target.value)
     }
 
     const changeContent = event => {
@@ -26,6 +30,13 @@ const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onConte
                 min={getCurrentDateTime()}
                 value={deadline}
                 onChange={changeDeadline}
+            />
+            <input
+                className={getClassNameByTaskStatus('task-title')}
+                type='text'
+                name='title-input'
+                value={title}
+                onChange={changeTitle}
             />
             <input
                 className={getClassNameByTaskStatus('task-content')}

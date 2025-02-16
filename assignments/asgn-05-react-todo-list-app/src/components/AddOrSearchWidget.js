@@ -3,6 +3,7 @@ import { getCurrentDateTime } from '../utils/utils'
 
 const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   const [action, setAction] = useState('Add')
+  const [titleInput, setTitleInput] = useState('')
   const [contentInput, setContentInput] = useState('')
   const [deadlineInput, setDeadlineInput] = useState('')
   const [deadlineSearchFrom, setDeadlineSearchFrom] = useState('')
@@ -13,6 +14,11 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
     if (!!deadlineInput) {
       setDeadlineSearchFrom(deadlineInput)
     }
+  }
+
+  const handleTitleInputChange = event => {
+    const inputValue = event.target.value
+    setTitleInput(inputValue)
   }
 
   const handleContentInputChange = event => {
@@ -33,9 +39,11 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   }
 
   const handleTaskAdd = () => {
-    if (contentInput === '') return
-    onTaskAdd(deadlineInput, contentInput)
+    // title is required for adding a task
+    if (titleInput === '') return
+    onTaskAdd(deadlineInput, titleInput, contentInput)
     setDeadlineInput('')
+    setTitleInput('')
     setContentInput('')
   }
 
@@ -47,7 +55,7 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   }
   
   const handleTaskSearch = () => {
-    onTaskSearch(deadlineSearchFrom, deadlineSearchTo, contentInput)
+    onTaskSearch(deadlineSearchFrom, deadlineSearchTo, titleInput, contentInput)
   }
 
   // use Enter key to search task
@@ -61,6 +69,7 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
     setDeadlineSearchFrom('')
     setDeadlineSearchTo('')
     setDeadlineInput('')
+    setTitleInput('')
     setContentInput('')
     onTaskSearch('', '', '')
   }
@@ -100,11 +109,19 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
       }
       <input
         type='text'
+        name='title-input'
+        value={titleInput}
+        onChange={handleTitleInputChange}
+        onKeyDown={action === 'Add' ? handleTaskAddByEnter : handleTaskSearchByEnter}
+        placeholder={`Title*: support 'ENTER' to ${action}`} 
+      />
+      <input
+        type='text'
         name='content-input'
         value={contentInput}
         onChange={handleContentInputChange}
         onKeyDown={action === 'Add' ? handleTaskAddByEnter : handleTaskSearchByEnter}
-        placeholder={`Support 'ENTER' to ${action}`} 
+        placeholder={`Content: support 'ENTER' to ${action}`} 
       />
       <button 
         onClick={action === 'Add' ? handleTaskAdd : handleTaskSearch}>{action}
