@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
+import './kenban.css'
 import Task from './components/Task'
 import AddOrSearchWidget from './components/AddOrSearchWidget'
 import { getCurrentDateTime } from './utils/utils'

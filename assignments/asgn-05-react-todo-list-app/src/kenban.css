@@ -1,0 +1,20 @@
+.task {
+    flex-direction: column;
+    width: fit-content;
+    border: 1px solid #E2E8F0;
+    padding: 1rem;
+    border-radius: 24px;
+}
+
+.task-controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-delete-button {
+    width: fit-content;
+}
+
+.task-checkbox {
+    width: fit-content;
+}

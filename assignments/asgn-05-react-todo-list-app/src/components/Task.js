@@ -20,13 +20,6 @@ const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onConte
     return (
         <div className='task'>
             <input
-                className='task-checkbox'
-                type='checkbox'
-                name='done-checkbox'
-                checked={done}
-                onChange={toggleDone}
-            />
-            <input
                 className={getClassNameByTaskStatus('task-date-time-picker')}
                 type='datetime-local'
                 // use current date & time as min value for datetime-local input
@@ -41,7 +34,16 @@ const Task = ({ deadline, content, done, onDoneToggle, onDeadlineChange, onConte
                 value={content}
                 onChange={changeContent}
             />
-            <div className='task-delete-button' onClick={onTaskDelete}>&#10060;</div>
+            <div className="task-controls">
+                <div className='task-delete-button' onClick={onTaskDelete}>&#10060;</div>
+                <input
+                    className='task-checkbox'
+                    type='checkbox'
+                    name='done-checkbox'
+                    checked={done}
+                    onChange={toggleDone}
+                />
+            </div>
         </div>
     )
 }
