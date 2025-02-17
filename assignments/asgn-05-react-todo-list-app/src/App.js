@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import './kenban.css'
 import Task from './components/Task'
-import AddOrSearchWidget from './components/AddOrSearchWidget'
+import AddOrSearchWidget from './components/AddOrSearchWidget/AddOrSearchWidget'
 import TaskListBar from './components/TaskListBar'
 import { getCurrentDateTime } from './utils/utils'
 import { v4  } from 'uuid'
@@ -147,9 +147,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <div className='add-or-search-widget'>
-        <AddOrSearchWidget onTaskAdd={handleTaskAdd} onTaskSearch={handleTaskSearch} />
-      </div>
+      <AddOrSearchWidget onTaskAdd={handleTaskAdd} onTaskSearch={handleTaskSearch} />
       <div className='task-lists'>
         {taskLists}
       </div>

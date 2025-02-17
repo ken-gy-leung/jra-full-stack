@@ -1,5 +1,6 @@
-import {useState} from 'react'
 // import { getCurrentDateTime } from '../utils/utils'
+import {useState} from 'react'
+import './AddOrSearchWidget.css'
 
 const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   const [action, setAction] = useState('Add')
@@ -75,7 +76,7 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   }
 
   return (
-    <>
+    <div className='add-or-search-widget'>
       <select name='action-select' value={action} onChange={handleActionChange}>
         <option value='Add'>Add</option>
         <option value='Search'>Search</option>
@@ -129,7 +130,7 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
       <button 
         onClick={handleSearchReset}>Reset
       </button>
-    </>
+    </div>
   )
 }
 
