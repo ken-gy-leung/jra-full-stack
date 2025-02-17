@@ -27,3 +27,8 @@
     border-radius: 24px;
     align-items: center;
 }
+
+.no-task-alt {
+    font-family: 'Poppins-Regular';
+    font-size: 1rem;
+}

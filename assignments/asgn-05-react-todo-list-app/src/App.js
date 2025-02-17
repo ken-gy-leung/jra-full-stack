@@ -86,7 +86,11 @@ const App = () => {
     const tasks = getLocalTaskStorage()
     // return all tasks if no search criteria is provided
     if ([deadlineFrom, deadlineTo, titleInput, contentInput].every(arg => !arg)) return setAllTasks(tasks)
-    const filteredTasks = tasks.filter(task => task.deadline >= deadlineFrom && (!deadlineTo || !task.deadline || task.deadline <= deadlineTo) && task.title.includes(titleInput) && task.content.includes(contentInput))
+    const filteredTasks = tasks.filter(task => (
+      !task.deadline || (task.deadline >= deadlineFrom && (!deadlineTo || task.deadline <= deadlineTo))
+    ) &&
+      task.title.includes(titleInput) && task.content.includes(contentInput)
+    )
     setAllTasks(filteredTasks)
   }
 
@@ -137,9 +141,16 @@ const App = () => {
   )
 
   const taskListOfStatus = (status, tasks, color) =>( 
-    <div key={status} className={`task-list task-list-${status}`} style={{ backgroundColor: `${color}11`}}>
+    <div key={status} className={`task-list task-list-${status}`} style={{ backgroundColor: `${color}11` }}>
       <TaskListBar count={tasks.length} status={status} color={color} />
-      {tasks.length === 0 ? `--- No ${status} tasks ---` : tasks}
+      {
+        tasks.length === 0 ?
+          <div className='no-task-alt' style={{ color: color }}>
+            {`--- No ${status} task ---`}
+          </div>
+          :
+          tasks
+      }
     </div>
   )
 
