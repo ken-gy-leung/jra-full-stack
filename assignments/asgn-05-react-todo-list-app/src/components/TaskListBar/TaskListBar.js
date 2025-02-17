@@ -1,4 +1,5 @@
-import { capitalizeWord } from "../utils/utils"
+import { capitalizeWord } from "../../utils/utils"
+import './TaskListBar.css'
 
 const TaskListBar = ({ count, status, color }) => (
     <div className='task-list-bar' style={{ backgroundColor: color }}>

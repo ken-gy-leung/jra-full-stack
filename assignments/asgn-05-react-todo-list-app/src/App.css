@@ -4,8 +4,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.task{
-  display: flex;
-  column-gap: 1px;
-}

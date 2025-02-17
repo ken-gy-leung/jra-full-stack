@@ -3,7 +3,7 @@ import './App.css'
 import './kenban.css'
 import Task from './components/Task'
 import AddOrSearchWidget from './components/AddOrSearchWidget/AddOrSearchWidget'
-import TaskListBar from './components/TaskListBar'
+import TaskListBar from './components/TaskListBar/TaskListBar'
 import { getCurrentDateTime } from './utils/utils'
 import { v4  } from 'uuid'
 
