@@ -24,23 +24,27 @@ const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadline
         // Reset to 1px first to force reflow
         element.style.height = '1px'
 
-        // Get fresh computed styles
         const computedStyle = getComputedStyle(element)
         const lineHeight = parseFloat(computedStyle.lineHeight)
         const padding = parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom)
 
-        // Calculate content height without padding
+        // Calculate base height for 1 line
+        const baseHeight = lineHeight + padding
+
+        // Get scroll height without padding
         const contentHeight = element.scrollHeight - padding
 
-        // Ensure minimum of 1 line even when empty
-        const lineCount = Math.max(Math.ceil(contentHeight / lineHeight), 1)
-        console.log('line count', lineCount)
-        // Calculate new height using lineCount
-        const newHeight = lineCount * lineHeight + padding
+        // Calculate needed lines (minimum 0 when empty)
+        const lineCount = contentHeight > 0 ? Math.ceil(contentHeight / lineHeight) : 0
 
-        // Apply calculated height
+        // Use maximum between content height and base height
+        const newHeight = Math.max(
+            lineCount * lineHeight + padding,
+            baseHeight
+        )
+
         element.style.height = `${newHeight}px`
-        element.style.overflowY = contentHeight > newHeight ? 'auto' : 'hidden'
+        element.style.overflowY = 'hidden' // Force hide scrollbar
     }
 
     useEffect(() => {
@@ -56,6 +60,15 @@ const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadline
         // Initial check in case fonts are already loaded
         if (document.fonts.status === 'loaded') {
             handleFontLoad()
+        }
+    }, [title])
+
+    useEffect(() => {
+        if (titleRef.current && !title) {
+            // Force single line when empty
+            titleRef.current.style.height = `${parseFloat(getComputedStyle(titleRef.current).lineHeight) +
+                parseFloat(getComputedStyle(titleRef.current).paddingTop) +
+                parseFloat(getComputedStyle(titleRef.current).paddingBottom)}px`
         }
     }, [title])
 
