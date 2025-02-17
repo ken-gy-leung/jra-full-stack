@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import './kenban.css'
 import Task from './components/Task'
@@ -14,7 +14,7 @@ const App = () => {
   const [allTasks, setAllTasks] = useState(initialTasks)
 
   // initialize state filter with the value from localStorage, or 'all' if there is no value
-  const [filter, setFilter] = useState(localStorage.getItem('filter') || 'all')
+  // const [filter, setFilter] = useState(localStorage.getItem('filter') || 'all')
 
   const getLocalTaskStorage = () => {
     return JSON.parse(localStorage.getItem('allTasks'))
@@ -123,6 +123,7 @@ const App = () => {
     <Task
       key={task.id}
       status={getTaskStatus(task)}
+      color={taskListsByStatus[getTaskStatus(task)]['color']}
       deadline={task.deadline}
       title={task.title}
       content={task.content}
@@ -136,7 +137,7 @@ const App = () => {
   )
 
   const taskListOfStatus = (status, tasks, color) =>( 
-    <div key={status} className={`task-list task-list-${status}`} style={{ backgroundColor: color + '11' }}>
+    <div key={status} className={`task-list task-list-${status}`} style={{ backgroundColor: `${color}11`}}>
       <TaskListBar count={tasks.length} status={status} color={color} />
       {tasks.length === 0 ? `--- No ${status} tasks ---` : tasks}
     </div>

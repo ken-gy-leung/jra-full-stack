@@ -1,7 +1,10 @@
 // import { getCurrentDateTime } from '../utils/utils'
+import { useState } from 'react'
 import AutoSizingTextarea from './AutoSizingTextarea/AutoSizingTextarea'
 
-const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadlineChange, onTitleChange, onContentChange, onTaskDelete }) => {
+const Task = ({ status, color, deadline, title, content, done, onDoneToggle, onDeadlineChange, onTitleChange, onContentChange, onTaskDelete,}) => {
+    const [inFocus, setInFocus] = useState(false)
+
     const toggleDone = event => {
         onDoneToggle(event.target.checked)
     }
@@ -18,8 +21,28 @@ const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadline
         onContentChange(event.target.value)
     }
 
+    const highlightTaskInFocus = () => {
+        document.querySelectorAll('.task').forEach(task => {
+            task.classList.remove('task-in-focus')
+        })
+        setInFocus(true)
+    }
+
+    const unhighlightTaskOutFocus = () => {
+        setInFocus(false)
+    }
+
     return (
-        <div className='task'>
+        <div
+            className={`task${inFocus ? ' task-in-focus' : ''}`}
+            style={{ 
+                borderColor: inFocus ? color : '#E2E8F0',
+                borderWidth: inFocus ? '2px' : '1px',
+                backgroundColor: inFocus ? `${color}20` : 'white',
+                opacity: status === 'completed' ? 0.5 : 1,
+                filter: status === 'completed' ? 'grayscale(100%)' : null
+            }}
+        >
             <div className='task-controls'>
                 <input
                     className='task-checkbox'
@@ -35,8 +58,9 @@ const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadline
                 // min={getCurrentDateTime()}
                 value={deadline}
                 onChange={changeDeadline}
+                onFocus={highlightTaskInFocus}
+                onBlur={unhighlightTaskOutFocus}
             />
-                {/* <div className='task-delete-button' onClick={onTaskDelete}>&#10060;</div> */}
                 <div className='task-delete-button' onClick={onTaskDelete}>
                     <svg xmlns="http://www.w3.org/2000/svg" height="20" width="15" viewBox="0 0 384 512">
                     {/* !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc. */}
@@ -48,14 +72,18 @@ const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadline
                 className={`task-title task-${status}`}
                 name='title'
                 value={title}
-                onChangeValue={changeTitle}
+                onValueChange={changeTitle}
+                onTaskFocus={highlightTaskInFocus}
+                onTaskBlur={unhighlightTaskOutFocus}
             />
 
             <AutoSizingTextarea
                 className={`task-content task-${status}`}
                 name='content'
                 value={content}
-                onChangeValue={changeContent}
+                onValueChange={changeContent}
+                onTaskFocus={highlightTaskInFocus}
+                onTaskBlur={unhighlightTaskOutFocus}
             />
         </div>
     )

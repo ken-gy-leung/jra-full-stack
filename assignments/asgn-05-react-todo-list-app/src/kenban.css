@@ -57,7 +57,9 @@
 .task {
     flex-direction: column;
     width: fit-content;
-    border: 1px solid #E2E8F0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #E2E8F0;
     padding: 1rem;
     border-radius: 10px;
     background-color: white;
@@ -66,6 +68,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+.task:focus {
+    border: 10px solid red;
+}
 .task:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
@@ -150,13 +155,12 @@
 }
 
 .task-title {
-    /* 'all: unset' has to stay with font css settings, 
-                 which otherwise would be unset along 
-                 with other default styles of textarea */
+    /* 'all: unset' has to stay with font style settings, 
+        which otherwise would be unset along 
+        with other default styles of textarea */
     all: unset;
     font-family: 'Poppins-Regular';
     font-size: 1.1rem;
-    /* only works for Chinese */
     font-weight: bold;
 }
 
