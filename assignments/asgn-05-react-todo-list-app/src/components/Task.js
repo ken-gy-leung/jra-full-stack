@@ -20,25 +20,43 @@ const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadline
 
     const titleRef = useRef(null)
 
-    const pxToRem = px => {
-        const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize)
-        return px / baseFontSize
-    }
-
     const adjustHeight = element => {
-        element.style.height = 'auto'
-        console.log('title input:')
-        console.log(element)
-        let heightInRem = pxToRem(element.scrollHeight)
-        console.log('scroll height:', `${heightInRem}rem`)
-        heightInRem = heightInRem < 4.7 ? heightInRem - 2 : heightInRem - 1
-        element.style.height = `${heightInRem}rem`
+        // Reset to 1px first to force reflow
+        element.style.height = '1px'
+
+        // Get fresh computed styles
+        const computedStyle = getComputedStyle(element)
+        const lineHeight = parseFloat(computedStyle.lineHeight)
+        const padding = parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom)
+
+        // Calculate content height without padding
+        const contentHeight = element.scrollHeight - padding
+
+        // Ensure minimum of 1 line even when empty
+        const lineCount = Math.max(Math.ceil(contentHeight / lineHeight), 1)
+        console.log('line count', lineCount)
+        // Calculate new height using lineCount
+        const newHeight = lineCount * lineHeight + padding
+
+        // Apply calculated height
+        element.style.height = `${newHeight}px`
+        element.style.overflowY = contentHeight > newHeight ? 'auto' : 'hidden'
     }
 
     useEffect(() => {
-        // if (titleRef.current) {
-            adjustHeight(titleRef.current)
-        // }
+        const handleFontLoad = () => {
+            if (titleRef.current) {
+                adjustHeight(titleRef.current)
+            }
+        }
+
+        // Wait for fonts to load before first calculation
+        document.fonts.ready.then(handleFontLoad)
+
+        // Initial check in case fonts are already loaded
+        if (document.fonts.status === 'loaded') {
+            handleFontLoad()
+        }
     }, [title])
 
     return (
