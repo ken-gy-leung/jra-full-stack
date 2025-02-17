@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import AutoSizingTextarea from './AutoSizingTextarea/AutoSizingTextarea'
 
-const Task = ({ status, color, deadline, title, content, done, onDoneToggle, onDeadlineChange, onTitleChange, onContentChange, onTaskDelete,}) => {
+const TaskCard = ({ status, color, deadline, title, content, done, onDoneToggle, onDeadlineChange, onTitleChange, onContentChange, onTaskDelete,}) => {
     const [inFocus, setInFocus] = useState(false)
 
     const toggleDone = event => {
@@ -89,4 +89,4 @@ const Task = ({ status, color, deadline, title, content, done, onDoneToggle, onD
     )
 }
 
-export default Task
+export default TaskCard

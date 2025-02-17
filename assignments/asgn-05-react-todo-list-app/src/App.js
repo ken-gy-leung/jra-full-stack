@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import './kenban.css'
-import Task from './components/Task'
+import TaskCard from './components/TaskCard'
 import AddOrSearchWidget from './components/AddOrSearchWidget/AddOrSearchWidget'
 import TaskListBar from './components/TaskListBar/TaskListBar'
 import { getCurrentDateTime } from './utils/utils'
@@ -118,9 +118,9 @@ const App = () => {
     completed: { tasks: completedTasks, color: '#94A3B8' }
   }
   
-  // create Task components for tasks
+  // create TaskCard components for tasks
   const createTaskTabs = tasks => tasks.map(task =>
-    <Task
+    <TaskCard
       key={task.id}
       status={getTaskStatus(task)}
       color={taskListsByStatus[getTaskStatus(task)]['color']}
