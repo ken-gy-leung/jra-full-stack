@@ -9,20 +9,3 @@
   display: flex;
   column-gap: 1px;
 }
-
-.task-date-time-picker{
-  cursor: pointer;
-}
-
-.task-delete-button {
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-}
-
-.task-delete-button:hover {
-  transform: rotate(90deg);
-}
-
-.task-delete-button:not(:hover) {
-  transform: rotate(-90deg);
-}

@@ -1,23 +1,17 @@
 @font-face {
-    font-family: 'Poppins-Bold';
-    src: url('assets/fonts/Poppins-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'Poppins-Regular';
     src: url('assets/fonts/Poppins-Regular.ttf') format('truetype');
-    font-weight: 400;
+    font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Poppins-LightItalic';
-    src: url('assets/fonts/Poppins-LightItalic.ttf') format('truetype');
-    font-weight: 300;
+    font-family: 'Poppins-ExtraLight';
+    src: url('assets/fonts/Poppins-ExtraLight.ttf') format('truetype');
+    font-weight: normal;
     font-style: normal;
 }
+
 .task-lists {
     display: flex;
     gap: 2rem;
@@ -44,7 +38,8 @@
     background-color: white;
     width: 1.1rem;
     height: 1rem;
-    font-size: 1rem;
+    font-family: 'Poppins-Regular';
+    font-size: 1.1rem;
     border-radius: 1rem;
     display: flex;
     align-items: center;
@@ -53,6 +48,8 @@
 }
 
 .task-status {
+    font-family: 'Poppins-Regular';
+    font-weight: bold;
     color: white;
     padding-left: 0.5rem;
 }
@@ -69,46 +66,92 @@
 .task-controls {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #f1f7ff;
-        padding-bottom: 0.5rem;
-    }
-    
-    .task-checkbox {
-        width: fit-content;
-        margin-right: 0.8rem;
-        cursor: pointer;
-    }
-    
-    /* remove all built-in styles of task inputs except checkboxes */
-    .task input[type='datetime-local'] {
-        all: unset;
-        border-left: 1px solid #E2E8F0;
-        padding-left: 0.5rem;
-        cursor: pointer;
+    padding-bottom: 0.3rem;
 }
 
-.task-delete-button {
+.task-checkbox {
     width: fit-content;
+    margin: 0 0.5rem;
+    cursor: pointer;
+}
+
+.task-checkbox:focus-visible  {
+    background-color: red;
+}
+
+/* remove all built-in styles of task inputs except checkboxes */
+.task input[type='datetime-local'] {
+    all: unset;
+    width: 12rem;
+    border-style: solid;
+    border-color: #E2E8F0;
+    border-width: 0 1px;
+    padding: 0 0.5rem;
+    margin-right: 0.25rem;
+    cursor: pointer;
+    font-family: 'Poppins-ExtraLight';
+    font-weight: lighter;
+    font-size: 1rem;
+    transition: all 0.2s ease, transform 0.1s ease;
+}
+
+.task input[type='datetime-local']:hover {
+    background-color: #d3d3d322;
+    border-radius: 5px;
+}
+
+/* for style setting on default calendar picker */
+/* WebKit browsers (Chrome, Safari) */
+.task input[type='datetime-local']::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+/* Firefox */
+.task input[type='datetime-local']::-moz-calendar-picker-indicator {
+    cursor: pointer;
+}
+/* for style setting on default calendar picker end*/
+
+.task-delete-button {
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center;
+}
+
+.task-delete-button:hover {
+    transform: rotate(180deg);
+}
+
+*/ .task-delete-button {
+    transform: rotate(-180deg);
+}
+
+.task-delete-button svg {
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
 }
 
 .task-title {
+    /* 'all: unset' has to stay with font css settings, 
+                 which otherwise would be unset along 
+                 with other default styles of textarea */
     all: unset;
-    font-family: 'Poppins-Bold';
-    font-size: 1.2rem;
+    font-family: 'Poppins-Regular';
+    font-size: 1.1rem;
+    /* only works for Chinese */
     font-weight: bold;
-    padding: 0.5rem 0.3rem;
-    resize: none;
-    /* height: fit-content; */
-    overflow: hidden;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    min-height: calc(1.5rem + 1rem - 2px);
-        line-height: 1.5rem;
-        box-sizing: border-box;
 }
 
 .task-content {
-    /* all: unset; */
+    all: unset;
     font-family: 'Poppins-Regular';
     font-size: 1rem;
 }

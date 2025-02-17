@@ -1,5 +1,5 @@
 // import { getCurrentDateTime } from '../utils/utils'
-import { useEffect, useRef } from 'react'
+import AutoSizingTextarea from './AutoSizingTextarea/AutoSizingTextarea'
 
 const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadlineChange, onTitleChange, onContentChange, onTaskDelete }) => {
     const toggleDone = event => {
@@ -17,60 +17,6 @@ const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadline
     const changeContent = event => {
         onContentChange(event.target.value)
     }
-
-    const titleRef = useRef(null)
-
-    const adjustHeight = element => {
-        // Reset to 1px first to force reflow
-        element.style.height = '1px'
-
-        const computedStyle = getComputedStyle(element)
-        const lineHeight = parseFloat(computedStyle.lineHeight)
-        const padding = parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom)
-
-        // Calculate base height for 1 line
-        const baseHeight = lineHeight + padding
-
-        // Get scroll height without padding
-        const contentHeight = element.scrollHeight - padding
-
-        // Calculate needed lines (minimum 0 when empty)
-        const lineCount = contentHeight > 0 ? Math.ceil(contentHeight / lineHeight) : 0
-
-        // Use maximum between content height and base height
-        const newHeight = Math.max(
-            lineCount * lineHeight + padding,
-            baseHeight
-        )
-
-        element.style.height = `${newHeight}px`
-        element.style.overflowY = 'hidden' // Force hide scrollbar
-    }
-
-    useEffect(() => {
-        const handleFontLoad = () => {
-            if (titleRef.current) {
-                adjustHeight(titleRef.current)
-            }
-        }
-
-        // Wait for fonts to load before first calculation
-        document.fonts.ready.then(handleFontLoad)
-
-        // Initial check in case fonts are already loaded
-        if (document.fonts.status === 'loaded') {
-            handleFontLoad()
-        }
-    }, [title])
-
-    useEffect(() => {
-        if (titleRef.current && !title) {
-            // Force single line when empty
-            titleRef.current.style.height = `${parseFloat(getComputedStyle(titleRef.current).lineHeight) +
-                parseFloat(getComputedStyle(titleRef.current).paddingTop) +
-                parseFloat(getComputedStyle(titleRef.current).paddingBottom)}px`
-        }
-    }, [title])
 
     return (
         <div className='task'>
@@ -90,22 +36,26 @@ const Task = ({ status, deadline, title, content, done, onDoneToggle, onDeadline
                 value={deadline}
                 onChange={changeDeadline}
             />
-                <div className='task-delete-button' onClick={onTaskDelete}>&#10060;</div>
+                {/* <div className='task-delete-button' onClick={onTaskDelete}>&#10060;</div> */}
+                <div className='task-delete-button' onClick={onTaskDelete}>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="15" viewBox="0 0 384 512">
+                    {/* !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc. */}
+                    <path fill="#ff0000" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                    </svg>
+                </div>
             </div>
-            <textarea
-                ref={titleRef}
+            <AutoSizingTextarea
                 className={`task-title task-${status}`}
-                type='text'
-                name='title-input'
+                name='title'
                 value={title}
-                onChange={changeTitle}
+                onChangeValue={changeTitle}
             />
-            <textarea
+
+            <AutoSizingTextarea
                 className={`task-content task-${status}`}
-                type='text'
-                name='content-input'
+                name='content'
                 value={content}
-                onChange={changeContent}
+                onChangeValue={changeContent}
             />
         </div>
     )
