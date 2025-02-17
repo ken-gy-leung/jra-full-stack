@@ -61,6 +61,19 @@
     padding: 1rem;
     border-radius: 10px;
     background-color: white;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, box-shadow;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.task:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.task:active {
+    transform: translateY(0);
+    transition-duration: 50ms;
 }
 
 .task-controls {
@@ -75,10 +88,6 @@
     width: fit-content;
     margin: 0 0.5rem;
     cursor: pointer;
-}
-
-.task-checkbox:focus-visible  {
-    background-color: red;
 }
 
 /* remove all built-in styles of task inputs except checkboxes */
@@ -114,6 +123,7 @@
 .task input[type='datetime-local']::-moz-calendar-picker-indicator {
     cursor: pointer;
 }
+
 /* for style setting on default calendar picker end*/
 
 .task-delete-button {
