@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import './kenban.css'
-import TaskCard from './components/TaskCard'
+import TaskCard from './components/TaskCard/TaskCard'
 import AddOrSearchWidget from './components/AddOrSearchWidget/AddOrSearchWidget'
 import TaskListBar from './components/TaskListBar/TaskListBar'
 import { getCurrentDateTime } from './utils/utils'

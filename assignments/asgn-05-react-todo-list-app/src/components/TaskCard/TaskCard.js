@@ -1,6 +1,7 @@
 // import { getCurrentDateTime } from '../utils/utils'
 import { useState } from 'react'
-import AutoSizingTextarea from './AutoSizingTextarea/AutoSizingTextarea'
+import './TaskCard.css'
+import AutoSizingTextarea from '../AutoSizingTextarea/AutoSizingTextarea'
 
 const TaskCard = ({ status, color, deadline, title, content, done, onDoneToggle, onDeadlineChange, onTitleChange, onContentChange, onTaskDelete,}) => {
     const [inFocus, setInFocus] = useState(false)
@@ -52,15 +53,15 @@ const TaskCard = ({ status, color, deadline, title, content, done, onDoneToggle,
                     onChange={toggleDone}
                 />
                 <input
-                className={`task-date-time-picker task-${status}`}
-                type='datetime-local'
-                // use current date & time as min value for datetime-local input
-                // min={getCurrentDateTime()}
-                value={deadline}
-                onChange={changeDeadline}
-                onFocus={highlightTaskInFocus}
-                onBlur={unhighlightTaskOutFocus}
-            />
+                    className={`task-date-time-picker task-${status}`}
+                    type='datetime-local'
+                    // use current date & time as min value for datetime-local input
+                    // min={getCurrentDateTime()}
+                    value={deadline}
+                    onChange={changeDeadline}
+                    onFocus={highlightTaskInFocus}
+                    onBlur={unhighlightTaskOutFocus}
+                />
                 <div className='task-delete-button' onClick={onTaskDelete}>
                     <svg xmlns="http://www.w3.org/2000/svg" height="20" width="15" viewBox="0 0 384 512">
                     {/* !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc. */}
