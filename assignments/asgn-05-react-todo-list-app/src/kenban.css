@@ -1,3 +1,23 @@
+@font-face {
+    font-family: 'Poppins-Bold';
+    src: url('assets/fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('assets/fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins-LightItalic';
+    src: url('assets/fonts/Poppins-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
 .task-lists {
     display: flex;
     gap: 2rem;
@@ -30,7 +50,6 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
-    /* color: rgb(38, 215, 156); */
 }
 
 .task-status {
@@ -50,12 +69,43 @@
 .task-controls {
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid #f1f7ff;
+        padding-bottom: 0.5rem;
+    }
+    
+    .task-checkbox {
+        width: fit-content;
+        margin-right: 0.8rem;
+        cursor: pointer;
+    }
+    
+    /* remove all built-in styles of task inputs except checkboxes */
+    .task input[type='datetime-local'] {
+        all: unset;
+        border-left: 1px solid #E2E8F0;
+        padding-left: 0.5rem;
+        cursor: pointer;
 }
 
 .task-delete-button {
     width: fit-content;
 }
 
-.task-checkbox {
-    width: fit-content;
+.task-title {
+    all: unset;
+    font-family: 'Poppins-Bold';
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem 0.3rem;
+    resize: none;
+    /* height: fit-content; */
+    overflow: hidden;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.task-content {
+    /* all: unset; */
+    font-family: 'Poppins-Regular';
+    font-size: 1rem;
 }
