@@ -1,4 +1,17 @@
 .add-or-search-widget{
     display: flex;
-    flex-direction: column;
+    gap: 0.5rem;
+    height: fit-content;
+    padding: 1rem;
+    margin: 2rem 0;
+    border-radius: 24px;
+    background-color: #22C55E;
 }
+
+.widget-date-time-pickers, .widget-text-inputs, .widget-action-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+

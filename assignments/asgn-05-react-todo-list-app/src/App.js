@@ -3,7 +3,7 @@ import './App.css'
 import './kenban.css'
 import TaskCard from './components/TaskCard/TaskCard'
 import AddOrSearchWidget from './components/AddOrSearchWidget/AddOrSearchWidget'
-import TaskListBar from './components/TaskListBar/TaskListBar'
+import TaskList from './components/TaskList/TaskList'
 import { getCurrentDateTime } from './utils/utils'
 import { v4  } from 'uuid'
 
@@ -12,9 +12,6 @@ const App = () => {
   const allLocalTasks = localStorage.getItem('allTasks')
   const initialTasks = allLocalTasks ? JSON.parse(allLocalTasks) : []
   const [allTasks, setAllTasks] = useState(initialTasks)
-
-  // initialize state filter with the value from localStorage, or 'all' if there is no value
-  // const [filter, setFilter] = useState(localStorage.getItem('filter') || 'all')
 
   const getLocalTaskStorage = () => {
     return JSON.parse(localStorage.getItem('allTasks'))
@@ -123,7 +120,7 @@ const App = () => {
   }
   
   // create TaskCard components for tasks
-  const createTaskTabs = tasks => tasks.map(task =>
+  const createTaskCards = tasks => tasks.map(task =>
     <TaskCard
       key={task.id}
       status={getTaskStatus(task)}
@@ -140,25 +137,42 @@ const App = () => {
     />
   )
 
-  const taskListOfStatus = (status, tasks, color) =>( 
-    <div key={status} className={`task-list task-list-${status}`} style={{ backgroundColor: `${color}11` }}>
-      <TaskListBar count={tasks.length} status={status} color={color} />
-      {
-        tasks.length === 0 ?
-          <div className='no-task-alt' style={{ color: color }}>
+  const taskLists = Object.keys(taskListsByStatus).map(status => {
+    
+    const { tasks, color } = taskListsByStatus[status]
+    console.log(tasks)
+
+    return (
+      <TaskList
+        key={status}
+        listClasses={`task-list task-list-${status}`}
+        barTitle={status}
+        tasks={tasks}
+        color={color}
+      >
+        {tasks.length === 0 ?
+          <div className='no-task-alt' style={{ color }}>
             {`--- No ${status} task ---`}
           </div>
           :
-          tasks
-      }
-    </div>
-  )
-
-  const taskLists = Object.keys(taskListsByStatus).map(status => taskListOfStatus(status, createTaskTabs(taskListsByStatus[status]['tasks']), taskListsByStatus[status]['color']))
+          createTaskCards(tasks)
+        }
+      </TaskList>
+    )
+  })
 
   return (
     <div className='App'>
       <AddOrSearchWidget onTaskAdd={handleTaskAdd} onTaskSearch={handleTaskSearch} />
+      <TaskList
+        listClasses='add-or-search-widget'
+        barTitle='add or search'
+        tasks={allTasks}
+        color='#22C55E'
+      >
+        {
+        }
+      </TaskList>
       <div className='task-lists'>
         {taskLists}
       </div>
