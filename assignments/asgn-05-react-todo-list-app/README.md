@@ -9,9 +9,7 @@ npm start
 
 ## File changes
 Mainly in:  
-* [\src\App.js](https://github.com/ken-gy-leung/jra-full-stack/blob/asgn-05/assignments/asgn-05-react-todo-list-app/src/App.js) ***(HTML)***
-* [\src\App.css](https://github.com/ken-gy-leung/jra-full-stack/blob/asgn-05/assignments/asgn-05-react-todo-list-app/src/App.css) ***(CSS)***
-* [\src\components\Task.js](https://github.com/ken-gy-leung/jra-full-stack/blob/asgn-05/assignments/asgn-05-react-todo-list-app/src/components/Task.js) ***(JS)***
+* [\src](https://github.com/ken-gy-leung/jra-full-stack/tree/asgn-05/assignments/asgn-05-react-todo-list-app/src) 
 
 ## Content
 ### 目标：   
