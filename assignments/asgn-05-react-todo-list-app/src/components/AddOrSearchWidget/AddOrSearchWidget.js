@@ -1,42 +1,51 @@
 // import { getCurrentDateTime } from '../utils/utils'
 import {useState} from 'react'
 import './AddOrSearchWidget.css'
+import TaskList from '../TaskList/TaskList'
+import AddOrSearchCard from './AddOrSearchCard/AddOrSearchCard'
 
-const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
+const AddOrSearchWidget = ({ taskCount, color, onTaskAdd, onTaskSearch }) => {
   const [action, setAction] = useState('Add')
-  const [titleInput, setTitleInput] = useState('')
-  const [contentInput, setContentInput] = useState('')
   const [deadlineInput, setDeadlineInput] = useState('')
   const [deadlineSearchFrom, setDeadlineSearchFrom] = useState('')
   const [deadlineSearchTo, setDeadlineSearchTo] = useState('')
+  const [titleInput, setTitleInput] = useState('')
+  const [contentInput, setContentInput] = useState('')
 
-  const handleActionChange = event => {
-    setAction(event.target.value)
+  const handleActionChange = value => {
+    setAction(value)
     if (!!deadlineInput) {
       setDeadlineSearchFrom(deadlineInput)
     }
   }
 
-  const handleTitleInputChange = event => {
-    const inputValue = event.target.value
-    setTitleInput(inputValue)
+  const handleDeadlineChange = value => {
+    setDeadlineInput(value)
   }
 
-  const handleContentInputChange = event => {
-    const inputValue = event.target.value
-    setContentInput(inputValue)
+  const handleDeadlineFromChange = value => {
+    setDeadlineSearchFrom(value)
   }
 
-  const handleDeadlineChange = event => {
-    setDeadlineInput(event.target.value)
+  const handleDeadlineToChange = value => {
+    setDeadlineSearchTo(value)
   }
 
-  const handleDeadlineFromChange = event => {
-    setDeadlineSearchFrom(event.target.value)
+  const handleTitleInputChange = value => {
+    setTitleInput(value)
   }
 
-  const handleDeadlineToChange = event => {
-    setDeadlineSearchTo(event.target.value)
+  const handleContentInputChange = value => {
+    setContentInput(value)
+  }
+
+  const handleReset = () => {
+    setDeadlineSearchFrom('')
+    setDeadlineSearchTo('')
+    setDeadlineInput('')
+    setTitleInput('')
+    setContentInput('')
+    onTaskSearch('', '', '', '')
   }
 
   const handleTaskAdd = () => {
@@ -49,8 +58,8 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   }
 
   // use Enter key to add task
-  const handleTaskAddByEnter = (event) => {
-    if(event.key === 'Enter'){
+  const handleTaskAddByEnter = key => {
+    if(key === 'Enter'){
       handleTaskAdd()
     }
   }
@@ -60,83 +69,46 @@ const AddOrSearchWidget = ({ onTaskAdd, onTaskSearch }) => {
   }
 
   // use Enter key to search task
-  const handleTaskSearchByEnter = (event) => {
-    if(event.key === 'Enter'){
+  const handleTaskSearchByEnter = key => {
+    if(key === 'Enter'){
       handleTaskSearch()
     }
   }
 
-  const handleSearchReset = () => {
-    setDeadlineSearchFrom('')
-    setDeadlineSearchTo('')
-    setDeadlineInput('')
-    setTitleInput('')
-    setContentInput('')
-    onTaskSearch('', '', '')
-  }
-
   return (
-    <div className='add-or-search-widget'>
-      <select name='action-select' value={action} onChange={handleActionChange}>
-        <option value='Add'>Add</option>
-        <option value='Search'>Search</option>
-      </select>
-      <div className="widget-date-time-pickers">
-        {
-          action === 'Add' ?
-            <input
-              type='datetime-local'
-              // use current date & time as min value for datetime-local input
-              // min={getCurrentDateTime()}
-              value={deadlineInput}
-              data-placeholder='Pick a Deadline'
-              onChange={handleDeadlineChange}
-            /> :
-            <>
-              <input
-                type='datetime-local'
-                value={deadlineSearchFrom}
-                data-placeholder='From'
-                max={deadlineSearchTo}
-                onChange={handleDeadlineFromChange}
-              />
-              <input
-                type='datetime-local'
-                value={deadlineSearchTo}
-                data-placeholder='To'
-                min={deadlineSearchFrom}
-                onChange={handleDeadlineToChange}
-              />
-            </>
-        }
-      </div>
-      <div className="widget-text-inputs">
-        <input
-          type='text'
-          name='title-input'
-          value={titleInput}
-          onChange={handleTitleInputChange}
-          onKeyDown={action === 'Add' ? handleTaskAddByEnter : handleTaskSearchByEnter}
-          placeholder={`Title*: support 'ENTER' to ${action}`}
-        />
-        <input
-          type='text'
-          name='content-input'
-          value={contentInput}
-          onChange={handleContentInputChange}
-          onKeyDown={action === 'Add' ? handleTaskAddByEnter : handleTaskSearchByEnter}
-          placeholder={`Content: support 'ENTER' to ${action}`}
-        />
-      </div>
+    <TaskList
+      listClasses='add-or-search-widget'
+      barTitle='add or search'
+      taskCount={taskCount}
+      color={color}
+    >
+      <AddOrSearchCard
+        color={color}
+        action={action}
+        deadlineInput={deadlineInput}
+        deadlineSearchFrom={deadlineSearchFrom}
+        deadlineSearchTo={deadlineSearchTo}
+        title={titleInput}
+        content={contentInput}
+        onActionChange={handleActionChange}
+        onDeadlineChange={handleDeadlineChange}
+        onDeadlineFromChange={handleDeadlineFromChange}
+        onDeadlineToChange={handleDeadlineToChange}
+        onTitleChange={handleTitleInputChange}
+        onContentChange={handleContentInputChange}
+        onTaskAddByEnter={handleTaskAddByEnter}
+        onTaskSearchByEnter={handleTaskSearchByEnter}
+      >
+      </AddOrSearchCard>
       <div className="widget-action-buttons">
         <button
           onClick={action === 'Add' ? handleTaskAdd : handleTaskSearch}>{action}
         </button>
         <button
-          onClick={handleSearchReset}>Reset
+          onClick={handleReset}>Reset
         </button>
       </div>
-    </div>
+    </TaskList>
   )
 }
 

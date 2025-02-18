@@ -140,7 +140,6 @@ const App = () => {
   const taskLists = Object.keys(taskListsByStatus).map(status => {
     
     const { tasks, color } = taskListsByStatus[status]
-    console.log(tasks)
 
     return (
       <TaskList
@@ -163,16 +162,12 @@ const App = () => {
 
   return (
     <div className='App'>
-      <AddOrSearchWidget onTaskAdd={handleTaskAdd} onTaskSearch={handleTaskSearch} />
-      <TaskList
-        listClasses='add-or-search-widget'
-        barTitle='add or search'
+      <AddOrSearchWidget
         taskCount={allTasks.length}
         color='#22C55E'
-      >
-        {
-        }
-      </TaskList>
+        onTaskAdd={handleTaskAdd}
+        onTaskSearch={handleTaskSearch}
+      />
       <div className='task-lists'>
         {taskLists}
       </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import './AutoSizingTextarea.css'
 
-const AutoSizingTextarea = ({ className, name, value, onValueChange, onTaskFocus, onTaskBlur }) => {
+const AutoSizingTextarea = ({ className, name, value, holderText, titleHint, onValueChange, onTaskFocus, onTaskBlur, onEnterDown }) => {
     const textareaRef = useRef(null)
 
     const adjustHeight = element => {
@@ -60,13 +60,15 @@ const AutoSizingTextarea = ({ className, name, value, onValueChange, onTaskFocus
         <textarea
             ref={textareaRef}
             className={`auto-sizing-textarea ${className}`}
-            placeholder={`Any ${name} ...?`}
+            placeholder={holderText}
+            title={titleHint}
             type='text'
             name={name}
             value={value}
             onChange={onValueChange}
             onFocus={onTaskFocus}
             onBlur={onTaskBlur}
+            onKeyDown={onEnterDown}
         />
     )
 }
