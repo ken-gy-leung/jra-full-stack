@@ -147,7 +147,7 @@ const App = () => {
         key={status}
         listClasses={`task-list task-list-${status}`}
         barTitle={status}
-        tasks={tasks}
+        taskCount={tasks.length}
         color={color}
       >
         {tasks.length === 0 ?
@@ -167,7 +167,7 @@ const App = () => {
       <TaskList
         listClasses='add-or-search-widget'
         barTitle='add or search'
-        tasks={allTasks}
+        taskCount={allTasks.length}
         color='#22C55E'
       >
         {
