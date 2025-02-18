@@ -102,9 +102,11 @@ const AddOrSearchWidget = ({ taskCount, color, onTaskAdd, onTaskSearch }) => {
       </AddOrSearchCard>
       <div className="widget-action-buttons">
         <button
+          name='action-button'
           onClick={action === 'Add' ? handleTaskAdd : handleTaskSearch}>{action}
         </button>
         <button
+          name='reset-button'
           onClick={handleReset}>Reset
         </button>
       </div>
